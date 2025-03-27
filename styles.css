@@ -128,7 +128,8 @@ header {
     background-color: var(--nav-bg);
     backdrop-filter: blur(5px);
     transition: all var(--transition-speed) ease;
-    height: 80px;
+    height: 100px;
+    overflow: visible;
 }
 
 .logo {
@@ -137,6 +138,7 @@ header {
     letter-spacing: -0.5px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .logo a {
@@ -144,6 +146,7 @@ header {
     align-items: center;
     text-decoration: none;
     color: var(--text-primary);
+    overflow: visible;
 }
 
 .logo-image {
@@ -154,7 +157,7 @@ header {
 }
 
 .logo-text {
-    height: 75px;
+    height: 300px;
     width: auto;
     object-fit: contain;
 }
@@ -215,8 +218,8 @@ nav ul li a:hover {
 
 /* Main Content and Gallery */
 main {
-    padding: 100px var(--spacing-lg) var(--spacing-lg);
-    min-height: calc(100vh - 80px);
+    padding: 140px var(--spacing-lg) var(--spacing-lg);
+    min-height: calc(100vh - 100px);
 }
 
 .gallery {
@@ -505,11 +508,15 @@ body {
 @media (max-width: 768px) {
     header {
         padding: var(--spacing-md) var(--spacing-lg);
-        height: 70px;
+        height: 100px;
     }
     
     main {
-        padding-top: 90px;
+        padding-top: 120px;
+    }
+
+    .logo-text {
+        height: 200px;
     }
 
     .menu-toggle {
