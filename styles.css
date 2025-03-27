@@ -518,6 +518,10 @@ body {
     .logo-text {
         height: 100px;
     }
+    
+    .theme-toggle {
+        bottom: 75px;
+    }
 
     .menu-toggle {
         display: flex;
@@ -573,6 +577,18 @@ body {
 
     .lightbox-content img {
         max-height: 75vh;
+    }
+    
+    .temp-banner {
+        bottom: 20px;
+        right: 20px;
+        max-width: 60%;
+        font-size: 0.7rem;
+    }
+    
+    .theme-toggle {
+        bottom: 20px;
+        left: 20px;
     }
 }
 
