@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - TheSora.io</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .pricing-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .pricing-header {
+            margin-bottom: 40px;
+        }
+        
+        .pricing-header h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+        
+        .pricing-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .pricing-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .pricing-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .pricing-card h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+        
+        .pricing-card .price {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin: 20px 0;
+            color: var(--accent);
+        }
+        
+        .pricing-card ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .pricing-card ul li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            line-height: 1.6;
+        }
+        
+        .pricing-card ul li:before {
+            content: '•';
+            position: absolute;
+            left: 5px;
+            color: var(--accent);
+        }
+        
+        .pricing-note {
+            background-color: rgba(0,0,0,0.02);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 40px 0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--accent);
+        }
+        
+        .pricing-image {
+            width: 100%;
+            margin: 40px 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .pricing-image div {
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .pricing-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-image {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .pricing-image {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <div class="loader">
+        <div class="loader-logo">
+            <img src="Logo.png" alt="TheSora.io Logo" class="loader-logo-image">
+        </div>
+    </div>
+    
+    <header>
+        <div class="logo"><img src="Logo.png" alt="TheSora.io Logo" class="logo-image">TheSora.io</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <main>
+        <div class="pricing-container">
+            <div class="pricing-header">
+                <h1>Pricing Options</h1>
+                <p>Professional photography sessions tailored to capture your unique style and personality.</p>
+            </div>
+            
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <h2>Individual Session</h2>
+                    <div class="price">$150</div>
+                    <p>Perfect for senior pictures and personal portraits</p>
+                    <ul>
+                        <li>Standard photoshoot including your choice of locations</li>
+                        <li>Personalized experience with variety of poses</li>
+                        <li>Multiple settings and outfit changes</li>
+                        <li>Edited photos provided separately after you select your favorites</li>
+                    </ul>
+                    <a href="contact.html" class="cta-button">Book Now</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h2>Group Session</h2>
+                    <div class="price">$150/hour</div>
+                    <p>For parties of 2 or more with club-style pictures</p>
+                    <ul>
+                        <li>Cost-effective option for groups</li>
+                        <li>All pictures included (both RAW and edited)</li>
+                        <li>Accommodates individual portraits within the session</li>
+                        <li>Flexible timing based on group size</li>
+                    </ul>
+                    <a href="contact.html" class="cta-button">Book Now</a>
+                </div>
+            </div>
+            
+            <div class="pricing-note">
+                <strong>Note:</strong> Pricing is negotiable. I'm happy to work with you to find a package that fits your needs and budget. Feel free to reach out to discuss custom options for your specific photography requirements.
+            </div>
+            
+            <p>For senior portraits specifically, the individual session is highly recommended to ensure we can focus entirely on capturing your unique personality and style. Each session is tailored to highlight your interests, achievements, and the essence of who you are at this important milestone.</p>
+            
+            <div class="pricing-image">
+                <div><img src="Sample Pictures - Sora/Ananya_Fall_Shoot_133.jpg" alt="Portrait Sample"></div>
+                <div><img src="Sample Pictures - Sora/UVA03434.jpg" alt="Portrait Sample"></div>
+                <div><img src="Sample Pictures - Sora/VANI_EDIT_38.jpg" alt="Portrait Sample"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 TheSora.io. All rights reserved.</p>
+            <p>Created by Udaya Vijay Anand</p>
+            <p>Contact: <a href="mailto:uvijayan@purdue.edu">uvijayan@purdue.edu</a> | +1 774-519-8830</p>
+            <p>Social: <a href="https://instagram.com/udsyx" target="_blank">Instagram</a> | Snapchat: @udsyx</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
