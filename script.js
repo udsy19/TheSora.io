@@ -43,9 +43,6 @@ document.addEventListener('click', function() {
 
 // Page loader
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize gallery
-    initGallery();
-    
     // Add temporary banner
     const banner = document.createElement('div');
     banner.className = 'temp-banner';
@@ -55,11 +52,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle loader
     setTimeout(() => {
         const loader = document.querySelector('.loader');
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-        }, 800);
+        if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 800);
+        }
     }, 2500);
+    
+    // Initialize gallery if on index page
+    if (document.getElementById('gallery')) {
+        initGallery();
+    }
     
     // Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
