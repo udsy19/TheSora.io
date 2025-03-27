@@ -122,51 +122,86 @@ function initGallery() {
         preloadImg.src = images[i].path;
     }
     
-    // Create gallery items
-    images.forEach((image, index) => {
-        const item = document.createElement('div');
-        item.className = 'gallery-item';
-        item.setAttribute('data-index', index);
-        
-        // Create blur-up loading effect
-        const placeholderBg = document.createElement('div');
-        placeholderBg.className = 'placeholder-bg';
-        item.appendChild(placeholderBg);
-        
-        // Create image with lazy loading and progressive enhancement
-        const img = new Image();
-        img.alt = image.caption;
-        img.loading = 'lazy'; 
-        img.className = 'gallery-image';
-        img.dataset.src = image.path;
-        img.style.opacity = '0';
-        
-        // Create loading spinner
-        const spinner = document.createElement('div');
-        spinner.className = 'spinner';
-        item.appendChild(spinner);
-        
-        // Add to DOM
-        item.appendChild(img);
-        gallery.appendChild(item);
-        
-        // Open lightbox on click
-        item.addEventListener('click', function() {
-            if (!item.classList.contains('loading')) {
-                openLightbox(index);
+    // Create gallery items with virtualization
+    const renderVisibleItems = () => {
+        // Clear existing items to avoid duplicates during re-render
+        const existingItems = document.querySelectorAll('.gallery-item');
+        existingItems.forEach(item => {
+            const index = parseInt(item.getAttribute('data-index'));
+            if (index >= images.length) {
+                item.remove();
             }
         });
-        
-        // Add staggered animation
-        setTimeout(() => {
-            item.classList.add('visible');
-            
-            // Start loading the image
-            if (isElementInViewport(item) || index < 8) {
-                loadImage(img, spinner, item);
+
+        // Determine a subset of images to render
+        images.forEach((image, index) => {
+            // Check if item already exists
+            const existingItem = document.querySelector(`.gallery-item[data-index="${index}"]`);
+            if (existingItem) {
+                const img = existingItem.querySelector('.gallery-image');
+                const spinner = existingItem.querySelector('.spinner');
+                
+                if (img && !img.dataset.loaded && isInLoadingRange(existingItem, index)) {
+                    loadImage(img, spinner, existingItem);
+                }
+                return;
             }
-        }, 100 * index);
-    });
+            
+            // Create new item
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.setAttribute('data-index', index);
+            
+            // Create blur-up loading effect
+            const placeholderBg = document.createElement('div');
+            placeholderBg.className = 'placeholder-bg';
+            item.appendChild(placeholderBg);
+            
+            // Create image with lazy loading and progressive enhancement
+            const img = new Image();
+            img.alt = image.caption;
+            img.loading = 'lazy'; 
+            img.className = 'gallery-image';
+            img.dataset.src = image.path;
+            img.style.opacity = '0';
+            
+            // Create loading spinner
+            const spinner = document.createElement('div');
+            spinner.className = 'spinner';
+            item.appendChild(spinner);
+            
+            // Add to DOM
+            item.appendChild(img);
+            gallery.appendChild(item);
+            
+            // Open lightbox on click
+            item.addEventListener('click', function() {
+                if (!item.classList.contains('loading')) {
+                    openLightbox(index);
+                }
+            });
+            
+            // Add staggered animation with reduced delay
+            setTimeout(() => {
+                item.classList.add('visible');
+                
+                // Start loading the image if it should be loaded
+                if (isInLoadingRange(item, index)) {
+                    loadImage(img, spinner, item);
+                }
+            }, 50 * Math.min(index, 10)); // Faster staggering, capped at 500ms
+        });
+    };
+    
+    // Initialize the gallery
+    renderVisibleItems();
+    
+    // Check if element should load (viewport or priority)
+    function isInLoadingRange(el, index) {
+        return isElementInViewport(el) || 
+               index < 12 || // Load first 12 images
+               index < 20 && Math.random() > 0.5; // Randomly load some more
+    }
     
     // Observe gallery items for infinite scroll effect
     observeGalleryItems();
@@ -183,38 +218,69 @@ function isElementInViewport(el) {
     );
 }
 
-// Load image with fade-in effect
+// Load image with progressive loading and fade-in effect
 function loadImage(img, spinner, container) {
-    if (img.dataset.loaded) return;
+    // Skip if already loaded or loading
+    if (img.dataset.loaded || img.dataset.loading) return;
     
+    img.dataset.loading = 'true';
     container.classList.add('loading');
     const src = img.dataset.src;
     
-    // Start loading the image
-    img.onload = function() {
-        // Image has loaded, fade it in
+    // Create performance tracker for debugging
+    const startTime = performance.now();
+    
+    // Add progressive loading with blur transition
+    const applyProgressiveLoading = () => {
+        // Image has loaded, fade it in with a nice blur transition
+        container.style.setProperty('--loading-progress', '100%');
+        
+        // First make it visible with blur
+        img.style.opacity = '1';
+        img.style.filter = 'blur(20px)';
+        
+        // Then animate to sharp
         setTimeout(() => {
-            img.style.opacity = '1';
-            spinner.style.opacity = '0';
-            container.classList.remove('loading');
-            img.dataset.loaded = true;
-            spinner.style.display = 'none';
+            img.style.transition = 'filter 0.5s ease-out';
+            img.style.filter = 'blur(0px)';
             
-            // Preload full size for lightbox
-            if (container.getAttribute('data-index') < 5) {
-                preloadForLightbox(src);
-            }
-        }, 100);
+            setTimeout(() => {
+                // Once animation complete, clean up
+                spinner.style.opacity = '0';
+                container.classList.remove('loading');
+                img.dataset.loaded = 'true';
+                delete img.dataset.loading;
+                spinner.style.display = 'none';
+                
+                const loadTime = performance.now() - startTime;
+                
+                // Preload for lightbox if this is a priority image
+                const index = parseInt(container.getAttribute('data-index'));
+                if (index < 8) {
+                    preloadForLightbox(src);
+                }
+            }, 500);
+        }, 10);
     };
+    
+    // Start loading the image
+    img.onload = applyProgressiveLoading;
     
     img.onerror = function() {
         container.classList.remove('loading');
         spinner.style.display = 'none';
         container.classList.add('error');
+        delete img.dataset.loading;
         console.log('Error loading image:', src);
     };
     
+    // Set src to start loading
     img.src = src;
+    
+    // Fallback if image is cached and onload doesn't fire
+    if (img.complete) {
+        applyProgressiveLoading();
+    }
 }
 
 // Preload images for lightbox
@@ -237,11 +303,11 @@ function preloadForLightbox(src) {
 
 // Intersection Observer for scroll animations and lazy loading
 function observeGalleryItems() {
-    const observer = new IntersectionObserver((entries) => {
+    // Create a more aggressive intersection observer for images
+    const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const item = entry.target;
-                item.classList.add('visible');
                 
                 // Load image if not already loaded
                 const img = item.querySelector('.gallery-image');
@@ -251,16 +317,58 @@ function observeGalleryItems() {
                     loadImage(img, spinner, item);
                 }
                 
-                observer.unobserve(item);
+                imageObserver.unobserve(item);
             }
         });
     }, {
-        threshold: 0.1,
-        rootMargin: '100px' // Load images a little before they come into view
+        threshold: 0.01, // Trigger with just 1% visibility
+        rootMargin: '200px 0px 200px 0px' // Load images further before they come into view
     });
     
-    document.querySelectorAll('.gallery-item:not(.visible)').forEach(item => {
-        observer.observe(item);
+    // Add scroll handler for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        // Clear the timeout if it's been set
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        
+        // Set a timeout to check for new items to load
+        scrollTimeout = setTimeout(function() {
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                const img = item.querySelector('.gallery-image');
+                const spinner = item.querySelector('.spinner');
+                const index = parseInt(item.getAttribute('data-index'));
+                
+                if (img && !img.dataset.loaded && isElementInViewport(item)) {
+                    loadImage(img, spinner, item);
+                }
+            });
+        }, 200); // Check every 200ms during scroll
+    });
+    
+    // Observe all gallery items
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        // Make sure item is visible for animation
+        if (!item.classList.contains('visible')) {
+            item.classList.add('visible');
+        }
+        
+        // Observe for image loading
+        imageObserver.observe(item);
+    });
+    
+    // Resize handler
+    window.addEventListener('resize', function() {
+        // Check for new items to load after resize
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            const img = item.querySelector('.gallery-image');
+            const spinner = item.querySelector('.spinner');
+            
+            if (img && !img.dataset.loaded && isElementInViewport(item)) {
+                loadImage(img, spinner, item);
+            }
+        });
     });
 }
 
