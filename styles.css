@@ -139,11 +139,40 @@ header {
     align-items: center;
 }
 
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
 .logo-image {
     height: 42px;
     width: auto;
     margin-right: 10px;
     object-fit: contain;
+}
+
+.logo-text {
+    height: 25px;
+    width: auto;
+    object-fit: contain;
+}
+
+.light-mode-logo {
+    display: block;
+}
+
+.dark-mode-logo {
+    display: none;
+}
+
+[data-theme="dark"] .light-mode-logo {
+    display: none;
+}
+
+[data-theme="dark"] .dark-mode-logo {
+    display: block;
 }
 
 nav ul {
