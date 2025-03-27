@@ -157,7 +157,7 @@ header {
 }
 
 .logo-text {
-    height: 300px;
+    height: 150px;
     width: auto;
     object-fit: contain;
 }
@@ -516,7 +516,7 @@ body {
     }
 
     .logo-text {
-        height: 200px;
+        height: 100px;
     }
 
     .menu-toggle {
