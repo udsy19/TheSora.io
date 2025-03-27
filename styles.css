@@ -106,9 +106,10 @@ header {
 }
 
 .logo-image {
-    height: 28px;
+    height: 32px;
     width: auto;
     margin-right: 8px;
+    object-fit: contain;
 }
 
 nav ul {
