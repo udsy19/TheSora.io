@@ -66,10 +66,14 @@ body {
 }
 
 .loader-logo {
-    font-size: 3rem;
-    font-weight: 600;
     opacity: 0;
     animation: fade-in 1s ease forwards, fade-out 1s ease 2s forwards;
+}
+
+.loader-logo-image {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
 }
 
 @keyframes fade-in {
