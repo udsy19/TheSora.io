@@ -100,7 +100,7 @@ body {
 }
 
 .loader-logo-image {
-    height: 90px;
+    height: 250px;
     width: auto;
     object-fit: contain;
 }

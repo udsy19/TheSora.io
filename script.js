@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 loader.style.display = 'none';
             }, 800);
         }
-    }, 2500);
+    }, 3000);
     
     // Initialize gallery if on index page
     if (document.getElementById('gallery')) {
