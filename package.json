@@ -1,0 +1,16 @@
+{
+  "name": "thesora-io",
+  "version": "1.0.0",
+  "description": "A minimalist photography portfolio website inspired by VSCO",
+  "main": "index.html",
+  "scripts": {
+    "dev": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Udaya Vijay Anand <uvijayan@purdue.edu>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@vercel/analytics": "^1.2.2"
+  }
+}
