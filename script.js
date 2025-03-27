@@ -115,28 +115,56 @@ function initGallery() {
         { path: 'Sample Pictures - Sora/VANI_EDIT_95.jpg', caption: 'Portrait Series' }
     ];
     
+    // Preload first few images for faster initial rendering
+    const preloadCount = Math.min(6, images.length);
+    for (let i = 0; i < preloadCount; i++) {
+        const preloadImg = new Image();
+        preloadImg.src = images[i].path;
+    }
+    
     // Create gallery items
     images.forEach((image, index) => {
         const item = document.createElement('div');
         item.className = 'gallery-item';
         item.setAttribute('data-index', index);
         
-        const img = document.createElement('img');
-        img.src = image.path;
-        img.alt = image.caption;
-        img.loading = 'lazy'; // Lazy load images
+        // Create blur-up loading effect
+        const placeholderBg = document.createElement('div');
+        placeholderBg.className = 'placeholder-bg';
+        item.appendChild(placeholderBg);
         
+        // Create image with lazy loading and progressive enhancement
+        const img = new Image();
+        img.alt = image.caption;
+        img.loading = 'lazy'; 
+        img.className = 'gallery-image';
+        img.dataset.src = image.path;
+        img.style.opacity = '0';
+        
+        // Create loading spinner
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner';
+        item.appendChild(spinner);
+        
+        // Add to DOM
         item.appendChild(img);
         gallery.appendChild(item);
         
         // Open lightbox on click
         item.addEventListener('click', function() {
-            openLightbox(index);
+            if (!item.classList.contains('loading')) {
+                openLightbox(index);
+            }
         });
         
         // Add staggered animation
         setTimeout(() => {
             item.classList.add('visible');
+            
+            // Start loading the image
+            if (isElementInViewport(item) || index < 8) {
+                loadImage(img, spinner, item);
+            }
         }, 100 * index);
     });
     
@@ -144,17 +172,91 @@ function initGallery() {
     observeGalleryItems();
 }
 
-// Intersection Observer for scroll animations
+// Check if element is in viewport
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Load image with fade-in effect
+function loadImage(img, spinner, container) {
+    if (img.dataset.loaded) return;
+    
+    container.classList.add('loading');
+    const src = img.dataset.src;
+    
+    // Start loading the image
+    img.onload = function() {
+        // Image has loaded, fade it in
+        setTimeout(() => {
+            img.style.opacity = '1';
+            spinner.style.opacity = '0';
+            container.classList.remove('loading');
+            img.dataset.loaded = true;
+            spinner.style.display = 'none';
+            
+            // Preload full size for lightbox
+            if (container.getAttribute('data-index') < 5) {
+                preloadForLightbox(src);
+            }
+        }, 100);
+    };
+    
+    img.onerror = function() {
+        container.classList.remove('loading');
+        spinner.style.display = 'none';
+        container.classList.add('error');
+        console.log('Error loading image:', src);
+    };
+    
+    img.src = src;
+}
+
+// Preload images for lightbox
+function preloadForLightbox(src) {
+    // Already preloaded full-size images
+    if (window.preloadedLightboxImages && window.preloadedLightboxImages[src]) {
+        return;
+    }
+    
+    // Initialize preloaded images cache if not exists
+    if (!window.preloadedLightboxImages) {
+        window.preloadedLightboxImages = {};
+    }
+    
+    // Preload image
+    const img = new Image();
+    img.src = src;
+    window.preloadedLightboxImages[src] = true;
+}
+
+// Intersection Observer for scroll animations and lazy loading
 function observeGalleryItems() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                const item = entry.target;
+                item.classList.add('visible');
+                
+                // Load image if not already loaded
+                const img = item.querySelector('.gallery-image');
+                const spinner = item.querySelector('.spinner');
+                
+                if (img && !img.dataset.loaded) {
+                    loadImage(img, spinner, item);
+                }
+                
+                observer.unobserve(item);
             }
         });
     }, {
-        threshold: 0.1
+        threshold: 0.1,
+        rootMargin: '100px' // Load images a little before they come into view
     });
     
     document.querySelectorAll('.gallery-item:not(.visible)').forEach(item => {
@@ -186,10 +288,51 @@ function closeLightbox() {
 function updateLightboxContent() {
     const items = document.querySelectorAll('.gallery-item');
     const currentItem = items[currentIndex];
-    const img = currentItem.querySelector('img');
+    const img = currentItem.querySelector('.gallery-image');
     
-    lightboxImg.src = img.src;
+    // Show loading indicator in lightbox
+    lightbox.classList.add('loading');
+    
+    // Use original image path
+    const imgSrc = img.dataset.src || img.src;
+    
+    // Only update if we need to
+    if (lightboxImg.src !== imgSrc) {
+        // Set up onload handler before changing src
+        lightboxImg.onload = function() {
+            // Once loaded, remove loading state
+            lightbox.classList.remove('loading');
+            // Preload next and previous images
+            preloadAdjacentImages();
+        };
+        
+        lightboxImg.src = imgSrc;
+    } else {
+        // Image is already loaded/same as current
+        lightbox.classList.remove('loading');
+    }
+    
     lightboxCaption.textContent = img.alt;
+}
+
+// Preload adjacent images for smoother lightbox navigation
+function preloadAdjacentImages() {
+    const items = document.querySelectorAll('.gallery-item');
+    const totalItems = items.length;
+    
+    // Preload next image
+    const nextIndex = (currentIndex + 1) % totalItems;
+    const nextImg = items[nextIndex].querySelector('.gallery-image');
+    if (nextImg) {
+        preloadForLightbox(nextImg.dataset.src || nextImg.src);
+    }
+    
+    // Preload previous image
+    const prevIndex = (currentIndex - 1 + totalItems) % totalItems;
+    const prevImg = items[prevIndex].querySelector('.gallery-image');
+    if (prevImg) {
+        preloadForLightbox(prevImg.dataset.src || prevImg.src);
+    }
 }
 
 function nextImage() {
