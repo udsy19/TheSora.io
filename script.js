@@ -41,13 +41,57 @@ document.addEventListener('click', function() {
     if (menu) menu.classList.remove('active');
 });
 
+// Theme management
+function getThemePreference() {
+    // Check if user previously selected a theme
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        return storedTheme;
+    }
+    
+    // Check system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+}
+
 // Page loader
 document.addEventListener('DOMContentLoaded', function() {
+    // Set initial theme
+    const initialTheme = getThemePreference();
+    setTheme(initialTheme);
+    
     // Add temporary banner
     const banner = document.createElement('div');
     banner.className = 'temp-banner';
     banner.textContent = 'Main website coming soon. This is a temporary preview.';
     document.body.appendChild(banner);
+    
+    // Add theme toggle button
+    const themeToggle = document.createElement('div');
+    themeToggle.className = 'theme-toggle';
+    themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    themeToggle.setAttribute('role', 'button');
+    themeToggle.setAttribute('tabindex', '0');
+    document.body.appendChild(themeToggle);
+    
+    // Add theme toggle event listeners
+    themeToggle.addEventListener('click', toggleTheme);
+    themeToggle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTheme();
+        }
+    });
     
     // Handle loader
     setTimeout(() => {
@@ -79,6 +123,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             this.children[0].style.transform = 'none';
             this.children[1].style.transform = 'none';
+        }
+    });
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('theme')) {
+            setTheme(e.matches ? 'dark' : 'light');
         }
     });
 });
