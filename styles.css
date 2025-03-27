@@ -580,15 +580,17 @@ body {
     }
     
     .temp-banner {
+        right: auto;
         bottom: 20px;
-        right: 20px;
+        left: 20px;
         max-width: 60%;
         font-size: 0.7rem;
     }
     
     .theme-toggle {
         bottom: 20px;
-        left: 20px;
+        left: auto;
+        right: 20px;
     }
 }
 
