@@ -10,13 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         .pricing-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
         .pricing-header {
             margin-bottom: 40px;
+            text-align: center;
         }
         
         .pricing-header h1 {
@@ -30,11 +31,24 @@
             color: var(--text-secondary);
             font-size: 1.1rem;
             line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .pricing-section {
+            margin-bottom: 60px;
+        }
+        
+        .pricing-section-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            text-align: center;
         }
         
         .pricing-options {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin-bottom: 50px;
         }
@@ -44,25 +58,56 @@
             border-radius: 8px;
             padding: 30px;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .pricing-card {
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .pricing-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
         .pricing-card h2 {
             font-size: 1.5rem;
             font-weight: 500;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             letter-spacing: -0.5px;
+        }
+        
+        .pricing-card .tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #ffffff;
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .dark-mode .pricing-card .tag {
+            background-color: var(--accent);
+            color: #000000;
+            box-shadow: 0 0 10px rgba(233, 185, 73, 0.5);
         }
         
         .pricing-card .price {
             font-size: 2.2rem;
             font-weight: 600;
-            margin: 20px 0;
+            margin: 15px 0;
             color: var(--accent);
+        }
+        
+        .pricing-card .description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
         }
         
         .pricing-card ul {
@@ -76,45 +121,238 @@
             position: relative;
             padding-left: 25px;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
         
         .pricing-card ul li:before {
-            content: '•';
+            content: '✓';
             position: absolute;
             left: 5px;
             color: var(--accent);
         }
         
-        .pricing-note {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 8px;
-            margin: 40px 0;
-            font-size: 0.95rem;
-            line-height: 1.7;
+        .pricing-card ul li.not-included:before {
+            content: '✗';
             color: var(--text-secondary);
+            opacity: 0.5;
+        }
+        
+        .dark-mode .pricing-card ul li.not-included:before {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+        
+        .graduate-package {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 50px;
+            border-left: 3px solid var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .graduate-package {
+            border: 1px solid rgba(255,255,255,0.1);
             border-left: 3px solid var(--accent);
         }
         
-        .pricing-image {
-            width: 100%;
-            margin: 40px 0;
+        .graduate-package h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .graduate-package h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .graduate-package p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .graduate-package .price {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin: 15px 0;
+            color: var(--accent);
+        }
+        
+        .graduate-package ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
         
-        .pricing-image div {
-            aspect-ratio: 3/4;
-            overflow: hidden;
+        .graduate-package ul li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            line-height: 1.6;
+        }
+        
+        .graduate-package ul li:before {
+            content: '✓';
+            position: absolute;
+            left: 5px;
+            color: var(--accent);
+        }
+        
+        .group-packages {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .group-card {
+            background-color: var(--card-bg);
             border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
-        .pricing-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .dark-mode .group-card {
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .group-card h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+        
+        .group-card .price {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 15px 0;
+            color: var(--accent);
+        }
+        
+        .group-card ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .group-card ul li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            line-height: 1.6;
+        }
+        
+        .group-card ul li:before {
+            content: '✓';
+            position: absolute;
+            left: 5px;
+            color: var(--accent);
+        }
+        
+        .addons-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .addons-section {
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .addons-section h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .addon-item {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--background);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .addon-item {
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .addon-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .addon-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .addon-item .price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .custom-section {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .custom-section {
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .custom-section h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .custom-section p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .button-row {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 20px;
         }
         
         .cta-button {
@@ -125,9 +363,9 @@
             border-radius: 4px;
             text-decoration: none;
             font-weight: 500;
-            margin-top: 20px;
             transition: all 0.3s ease;
             border: 1px solid transparent;
+            text-align: center;
         }
         
         .cta-button:hover {
@@ -136,19 +374,161 @@
             border-color: var(--accent);
         }
         
+        .secondary-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent);
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent);
+        }
+        
+        .secondary-button:hover {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            position: relative;
+            background-color: var(--background);
+            margin: 5% auto;
+            padding: 25px;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: var(--text-primary);
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .location-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .location-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .location-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .location-info {
+            padding: 15px;
+            background-color: var(--card-bg);
+        }
+        
+        .location-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .location-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 900px) {
+            .pricing-options {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .graduate-package ul {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .group-packages {
+                grid-template-columns: 1fr;
+            }
+            
+            .addons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+        
+        @media (max-width: 600px) {
             .pricing-options {
                 grid-template-columns: 1fr;
             }
             
-            .pricing-image {
-                grid-template-columns: 1fr 1fr;
+            .button-row {
+                flex-direction: column;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .pricing-image {
-                grid-template-columns: 1fr;
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 15px;
             }
         }
     </style>
@@ -187,51 +567,153 @@
     <main>
         <div class="pricing-container">
             <div class="pricing-header">
-                <h1>Pricing Options</h1>
-                <p>Professional photography sessions tailored to capture your unique style and personality.</p>
+                <h1>Our Photography Services</h1>
+                <p>We offer a variety of photography packages designed to meet your specific needs and budget, capturing your unique style and personality.</p>
             </div>
             
-            <div class="pricing-options">
-                <div class="pricing-card">
-                    <h2>Individual Session</h2>
-                    <div class="price">$150</div>
-                    <p>Perfect for senior pictures and personal portraits</p>
-                    <ul>
-                        <li>Standard photoshoot including your choice of locations</li>
-                        <li>Personalized experience with variety of poses</li>
-                        <li>Multiple settings and outfit changes</li>
-                        <li>Edited photos provided separately after you select your favorites</li>
-                    </ul>
-                    <a href="contact.html" class="cta-button">Book Now</a>
+            <div class="pricing-section">
+                <h2 class="pricing-section-title">Individual Photography Packages</h2>
+                <div class="pricing-options">
+                    <div class="pricing-card">
+                        <h2>Basic Session</h2>
+                        <div class="price">$99</div>
+                        <p class="description">30-minute session for quick portraits</p>
+                        <ul>
+                            <li>30-minute photo session</li>
+                            <li>All digital images included (unedited)</li>
+                            <li>Select raw photos of your choice</li>
+                            <li class="not-included">All edited photos included</li>
+                            <li>Online gallery delivery</li>
+                        </ul>
+                        <a href="contact.html" class="cta-button">Book Now</a>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <span class="tag">Popular</span>
+                        <h2>Standard Session</h2>
+                        <div class="price">$149</div>
+                        <p class="description">Our most popular individual package</p>
+                        <ul>
+                            <li>1-hour photo session</li>
+                            <li>All digital images included (unedited)</li>
+                            <li>Select raw photos of your choice</li>
+                            <li>All edited photos included</li>
+                            <li>Online gallery delivery</li>
+                        </ul>
+                        <a href="contact.html" class="cta-button">Book Now</a>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h2>Premium Session</h2>
+                        <div class="price">$199</div>
+                        <p class="description">Extended session with more edited photos</p>
+                        <ul>
+                            <li>2-hour photo session</li>
+                            <li>All digital images included (unedited)</li>
+                            <li>Select raw photos of your choice</li>
+                            <li>All edited photos included</li>
+                            <li>Online gallery delivery</li>
+                        </ul>
+                        <a href="contact.html" class="cta-button">Book Now</a>
+                    </div>
                 </div>
-                
-                <div class="pricing-card">
-                    <h2>Group Session</h2>
-                    <div class="price">$150/hour</div>
-                    <p>For parties of 2 or more with club-style pictures</p>
+            </div>
+            
+            <div class="pricing-section">
+                <div class="graduate-package">
+                    <h2>Graduate Photography Package</h2>
+                    <h3>Senior Portrait Special</h3>
+                    <p>Celebrate your graduation with a professional photoshoot designed to capture this important milestone in style.</p>
+                    <div class="price">$175</div>
                     <ul>
-                        <li>Cost-effective option for groups</li>
-                        <li>All pictures included (both RAW and edited)</li>
-                        <li>Accommodates individual portraits within the session</li>
-                        <li>Flexible timing based on group size</li>
+                        <li>Unlimited time, shooting until we get the perfect shots</li>
+                        <li>Multiple outfit changes</li>
+                        <li>Custom locations (up to 3 spots)</li>
+                        <li>All digital images provided (unedited)</li>
+                        <li>All edited photos included</li>
+                        <li>Optional add-on: Cap & Gown mini-session (+$50)</li>
                     </ul>
-                    <a href="contact.html" class="cta-button">Book Now</a>
+                    <div class="button-row">
+                        <a href="#" class="secondary-button" id="open-locations-modal">View Graduation Photo Locations</a>
+                        <a href="contact.html" class="cta-button">Book Graduation Session</a>
+                    </div>
                 </div>
             </div>
             
-            <div class="pricing-note">
-                <strong>Note:</strong> Pricing is negotiable. I'm happy to work with you to find a package that fits your needs and budget. Feel free to reach out to discuss custom options for your specific photography requirements.
+            <div class="pricing-section">
+                <h2 class="pricing-section-title">Group & Community Packages</h2>
+                <div class="group-packages">
+                    <div class="group-card">
+                        <h2>Team/Club Package</h2>
+                        <div class="price">$150/hour (min 2 hours)</div>
+                        <p>Perfect for sports teams and clubs</p>
+                        <ul>
+                            <li>Perfect for sports teams, clubs, and student organizations</li>
+                            <li>All digital images provided (unedited)</li>
+                            <li>Select raw photos of your choice</li>
+                            <li>Group shots and individual portraits</li>
+                            <li>Edited photos of group's choice (unlimited selection)</li>
+                        </ul>
+                        <a href="contact.html" class="cta-button">Book Team Session</a>
+                    </div>
+                    
+                    <div class="group-card">
+                        <h2>Greek Life/Community Special</h2>
+                        <div class="price">$150/hour (min 2 hours)</div>
+                        <p>For fraternities, sororities, and campus groups</p>
+                        <ul>
+                            <li>Designed for fraternities, sororities, and campus communities</li>
+                            <li>Complete coverage of group events and portraits</li>
+                            <li>All digital images provided (unedited)</li>
+                            <li>Select raw photos of your choice</li>
+                            <li>Unlimited edited photos of your choice</li>
+                            <li>Optional composite photo layout (+$75)</li>
+                            <li>10% discount for weekday bookings</li>
+                        </ul>
+                        <a href="contact.html" class="cta-button">Book Community Session</a>
+                    </div>
+                </div>
             </div>
             
-            <p>For senior portraits specifically, the individual session is highly recommended to ensure we can focus entirely on capturing your unique personality and style. Each session is tailored to highlight your interests, achievements, and the essence of who you are at this important milestone.</p>
+            <div class="pricing-section">
+                <div class="addons-section">
+                    <h2>Add-ons & Extras</h2>
+                    <p style="text-align: center; margin-bottom: 20px;">Customize your package with these premium options</p>
+                    <div class="addons-grid">
+                        <div class="addon-item">
+                            <h3>Express Delivery</h3>
+                            <p>Get your photos within 24 hours</p>
+                            <div class="price">+$30</div>
+                        </div>
+                        <div class="addon-item">
+                            <h3>Premium Retouching</h3>
+                            <p>Advanced editing for perfect results</p>
+                            <div class="price">+$15 per person</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <div class="pricing-image">
-                <div><img src="Sample Pictures - Sora/Ananya_Fall_Shoot_133.jpg" alt="Portrait Sample"></div>
-                <div><img src="Sample Pictures - Sora/UVA03434.jpg" alt="Portrait Sample"></div>
-                <div><img src="Sample Pictures - Sora/VANI_EDIT_38.jpg" alt="Portrait Sample"></div>
+            <div class="pricing-section">
+                <div class="custom-section">
+                    <h2>Customized Solutions</h2>
+                    <p>All packages can be tailored to suit your specific requirements. Have a unique vision for your photoshoot? Need something not listed here? Feel free to reach out to discuss your photography needs and we'll create a custom solution that works for you.</p>
+                    <a href="contact.html" class="cta-button">Contact Us</a>
+                </div>
             </div>
         </div>
     </main>
+
+    <!-- Graduation Photo Locations Modal -->
+    <div id="locations-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Graduation Photo Locations</h2>
+            <div class="location-grid">
+                <!-- Locations will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -243,5 +725,86 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Modal functionality for graduation photo locations
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('locations-modal');
+            const openButton = document.getElementById('open-locations-modal');
+            const closeButton = document.querySelector('.close-modal');
+            const locationGrid = document.querySelector('.location-grid');
+            
+            // Location data
+            const locations = [
+                { img: 'Graduation Picture Locations/Bell-Tower-RJM-2923.jpg', name: 'Bell Tower', description: 'Iconic campus landmark' },
+                { img: 'Graduation Picture Locations/University-Hall-JAU7093.jpg', name: 'University Hall', description: 'Historic building with classic architecture' },
+                { img: 'Graduation Picture Locations/Engineering Mall-0086 copy-2.JPG', name: 'Engineering Mall', description: 'Beautiful open space with modern buildings' },
+                { img: 'Graduation Picture Locations/Memorial Mall-DJI-0060-2 copy.JPG', name: 'Memorial Mall', description: 'Scenic area with stunning views' },
+                { img: 'Graduation Picture Locations/Purdue-Memorial-Union-RJM3199.jpg', name: 'Memorial Union', description: 'Elegant interior and exterior shots' },
+                { img: 'Graduation Picture Locations/Armstrong-Hall.jpg', name: 'Armstrong Hall', description: 'Science-themed backdrop' },
+                { img: 'Graduation Picture Locations/Gateway-Arch-RJW4331-Edit.jpg', name: 'Gateway Arch', description: 'Entrance landmark' },
+                { img: 'Graduation Picture Locations/Neil-Armstrong-Statue-RJM-.jpg', name: 'Neil Armstrong Statue', description: 'Inspirational monument' },
+                { img: 'Graduation Picture Locations/Parker-Hall-RJM6793.jpg', name: 'Parker Hall', description: 'Beautiful architecture' },
+                { img: 'Graduation Picture Locations/2022_JU19952.jpg', name: 'Fountain Plaza', description: 'Water features and greenery' },
+                { img: 'Graduation Picture Locations/2023_GMB7678.jpg', name: 'Campus Library', description: 'Book-lined backdrop' },
+                { img: 'Graduation Picture Locations/2023_KAL_4725.jpg', name: 'Arts Center', description: 'Creative and colorful environment' }
+            ];
+            
+            // Load location items
+            function loadLocations() {
+                locationGrid.innerHTML = '';
+                locations.forEach(location => {
+                    const item = document.createElement('div');
+                    item.className = 'location-item';
+                    item.innerHTML = `
+                        <img src="${location.img}" alt="${location.name}">
+                        <div class="location-info">
+                            <h3>${location.name}</h3>
+                            <p>${location.description}</p>
+                        </div>
+                    `;
+                    locationGrid.appendChild(item);
+                });
+            }
+            
+            // Open modal
+            openButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                loadLocations();
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+            
+            // Close modal
+            closeButton.addEventListener('click', () => {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = ''; // Restore scrolling
+                }, 300);
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = ''; // Restore scrolling
+                    }, 300);
+                }
+            });
+            
+            // Handle ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = ''; // Restore scrolling
+                    }, 300);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
