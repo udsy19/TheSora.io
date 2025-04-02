@@ -70,6 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const initialTheme = getThemePreference();
     setTheme(initialTheme);
     
+    // Set CSS RGB variables for better styling in dark mode
+    updateCssColorVariables();
+    
     // Add temporary banner
     const banner = document.createElement('div');
     banner.className = 'temp-banner';
@@ -93,7 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Handle loader
+    // Handle loader - shorter on mobile
+    const isMobile = window.innerWidth < 768;
     setTimeout(() => {
         const loader = document.querySelector('.loader');
         if (loader) {
@@ -102,11 +106,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 loader.style.display = 'none';
             }, 800);
         }
-    }, 3000);
+    }, isMobile ? 1500 : 3000); // Shorter loading time on mobile
     
-    // Initialize gallery if on index page
+    // Initialize gallery if on gallery page
     if (document.getElementById('gallery')) {
         initGallery();
+        
+        // Check for URL parameters (for direct category links)
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+        
+        if (categoryParam) {
+            // Find and click the corresponding category button
+            const categoryBtn = document.querySelector(`.category-btn[data-category="${categoryParam}"]`);
+            if (categoryBtn) {
+                setTimeout(() => {
+                    categoryBtn.click();
+                    
+                    // Scroll the button into view on mobile
+                    if (window.innerWidth <= 768) {
+                        categoryBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                }, 500); // Small delay to ensure gallery is initialized
+            }
+        }
+        
+        // Add scroll hint for mobile users
+        if (window.innerWidth <= 768) {
+            // Add scroll behavior to category filter on mobile
+            const categoryFilter = document.querySelector('.category-filter');
+            if (categoryFilter) {
+                categoryFilter.addEventListener('scroll', debounce(() => {
+                    // Hide indicator when user scrolls
+                    const indicator = document.querySelector('.filter-indicator');
+                    if (indicator) {
+                        indicator.style.opacity = '0';
+                        setTimeout(() => {
+                            indicator.style.display = 'none';
+                        }, 500);
+                    }
+                }, 100));
+            }
+        }
+    }
+    
+    // Initialize testimonial slider if on home page
+    if (document.querySelector('.testimonial-slider')) {
+        initTestimonialSlider();
     }
     
     // Mobile menu toggle
@@ -115,15 +161,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     menuToggle.addEventListener('click', function() {
         nav.classList.toggle('active');
-        // Animate hamburger to X
+        
+        // Animate hamburger to X - use transition values based on screen size
         this.classList.toggle('active');
+        const offset = window.innerWidth < 480 ? 5 : 7; // Smaller offset on very small screens
+        
         if (this.classList.contains('active')) {
-            this.children[0].style.transform = 'translateY(7px) rotate(45deg)';
-            this.children[1].style.transform = 'translateY(-7px) rotate(-45deg)';
+            this.children[0].style.transform = `translateY(${offset}px) rotate(45deg)`;
+            this.children[1].style.transform = `translateY(-${offset}px) rotate(-45deg)`;
         } else {
             this.children[0].style.transform = 'none';
             this.children[1].style.transform = 'none';
         }
+        
+        // Prevent scrolling when menu is open
+        if (this.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Close the mobile menu when clicking on a link
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (menuToggle.classList.contains('active')) {
+                menuToggle.click(); // Close the menu
+            }
+        });
     });
     
     // Listen for system theme changes
@@ -132,38 +197,173 @@ document.addEventListener('DOMContentLoaded', function() {
             setTheme(e.matches ? 'dark' : 'light');
         }
     });
+    
+    // Handle resize events
+    window.addEventListener('resize', debounce(() => {
+        // Update any size-dependent elements
+        if (document.querySelector('.mobile-hero-image')) {
+            adjustMobileHero();
+        }
+    }, 150));
+    
+    // Initial adjustment for mobile hero
+    if (document.querySelector('.mobile-hero-image')) {
+        adjustMobileHero();
+    }
 });
+
+// Helper function to update CSS RGB variables
+function updateCssColorVariables() {
+    const root = document.documentElement;
+    const theme = root.getAttribute('data-theme') || 'light';
+    
+    // Set the background-rgb variable for gradient transitions
+    const backgroundColor = getComputedStyle(root).getPropertyValue('--background').trim();
+    
+    // Make sure we have the RGB values
+    let r, g, b;
+    if (backgroundColor.startsWith('#')) {
+        const hex = backgroundColor.replace('#', '');
+        r = parseInt(hex.substr(0, 2), 16);
+        g = parseInt(hex.substr(2, 2), 16);
+        b = parseInt(hex.substr(4, 2), 16);
+    } else if (backgroundColor.startsWith('rgb')) {
+        const rgb = backgroundColor.match(/\d+/g);
+        r = parseInt(rgb[0]);
+        g = parseInt(rgb[1]);
+        b = parseInt(rgb[2]);
+    } else {
+        // Default fallback if parsing fails
+        r = theme === 'dark' ? 18 : 255;
+        g = theme === 'dark' ? 18 : 255;
+        b = theme === 'dark' ? 18 : 255;
+    }
+    
+    root.style.setProperty('--background-rgb', `${r}, ${g}, ${b}`);
+}
+
+// Helper function to adjust mobile hero size
+function adjustMobileHero() {
+    const mobileHero = document.querySelector('.mobile-hero-image');
+    if (!mobileHero) return;
+    
+    if (window.innerWidth <= 768) {
+        mobileHero.style.display = 'flex';
+        // Adjust height based on screen size
+        if (window.innerWidth <= 480) {
+            mobileHero.style.height = '40vh';
+        } else {
+            mobileHero.style.height = '50vh';
+        }
+    } else {
+        mobileHero.style.display = 'none';
+    }
+}
+
+// Debounce function for resize events
+function debounce(func, wait) {
+    let timeout;
+    return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(context, args);
+        }, wait);
+    };
+}
+
+// Initialize testimonial slider
+function initTestimonialSlider() {
+    const dots = document.querySelectorAll('.testimonial-dot');
+    const slides = document.querySelectorAll('.testimonial-slide');
+    let currentSlide = 0;
+    let slideInterval;
+    
+    // Set up dot click handlers
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+        });
+    });
+    
+    // Show a specific slide
+    function showSlide(index) {
+        // Remove active class from all slides and dots
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        // Add active class to current slide and dot
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        
+        currentSlide = index;
+        
+        // Reset the interval
+        clearInterval(slideInterval);
+        startSlideInterval();
+    }
+    
+    // Start automatic sliding
+    function startSlideInterval() {
+        slideInterval = setInterval(() => {
+            let nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+        }, 5000); // Change slide every 5 seconds
+    }
+    
+    // Start the slider
+    startSlideInterval();
+}
 
 // Gallery initialization
 function initGallery() {
     const gallery = document.getElementById('gallery');
     const images = [
-        { path: 'Sample Pictures - Sora/Ananya_Fall_Shoot_133.jpg', caption: 'Fall Portrait' },
-        { path: 'Sample Pictures - Sora/Ananya_Fall_Shoot_138.jpg', caption: 'Fall Collection' },
-        { path: 'Sample Pictures - Sora/Ananya_Fall_Shoot_202.jpg', caption: 'Autumn Vibes' },
-        { path: 'Sample Pictures - Sora/Ananya_Fall_Shoot_203.jpg', caption: 'Fall Portrait' },
-        { path: 'Sample Pictures - Sora/Ananya_Fall_Shoot_208.jpg', caption: 'Autumn Collection' },
-        { path: 'Sample Pictures - Sora/Ananya_Fall_Shoot_238.jpg', caption: 'Fall Portrait' },
-        { path: 'Sample Pictures - Sora/Ananya_Fall_Shoot_257.jpg', caption: 'Autumn Mood' },
-        { path: 'Sample Pictures - Sora/Ananya_Fall_Shoot_268.jpg', caption: 'Fall Portrait' },
-        { path: 'Sample Pictures - Sora/UVA02861.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/UVA03304.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/UVA03409.jpg', caption: 'Portrait Series' },
-        { path: 'Sample Pictures - Sora/UVA03434.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/UVA03441.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_112.jpg', caption: 'Portrait Series' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_117.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_119.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_122.jpg', caption: 'Portrait Series' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_19.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_2.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_38.jpg', caption: 'Portrait Series' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_46.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_59.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_6.jpg', caption: 'Portrait Series' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_81.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_94.jpg', caption: 'Portrait' },
-        { path: 'Sample Pictures - Sora/VANI_EDIT_95.jpg', caption: 'Portrait Series' }
+        // Portrait Sessions
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg', caption: 'Fall Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_138.jpg', caption: 'Fall Collection', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_202.jpg', caption: 'Autumn Vibes', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_203.jpg', caption: 'Fall Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_208.jpg', caption: 'Autumn Collection', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_238.jpg', caption: 'Fall Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA02861.jpg', caption: 'Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA03304.jpg', caption: 'Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA03409.jpg', caption: 'Portrait Series', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA03430.jpg', caption: 'Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_112.jpg', caption: 'Portrait Series', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_117.jpg', caption: 'Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_38.jpg', caption: 'Portrait Series', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_46.jpg', caption: 'Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg', caption: 'Portrait Series', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Thandava-Photoshoot-002.jpg', caption: 'Portrait Session', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Thandava-Photoshoot-018.jpg', caption: 'Portrait Session', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Thandava-Photoshoot-044.jpg', caption: 'Portrait Session', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Thandava-Photoshoot-065.jpg', caption: 'Portrait Session', category: ['portrait'] },
+        
+        // Themed Photoshoots
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-124.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-163.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-186.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-202.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-230.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-257.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-266.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-270.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-290.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        
+        // Additional campus images
+        { path: 'Graduation Picture Locations/2023_KAL_4724.jpg', caption: 'Campus View', category: ['landscape'] },
+        { path: 'Graduation Picture Locations/2022_JU19977.jpg', caption: 'Campus Portrait', category: ['portrait'] },
+        { path: 'Graduation Picture Locations/Bell-Tower-RJM4289.jpg', caption: 'Bell Tower', category: ['landscape'] },
+        { path: 'Graduation Picture Locations/2023_KAL_4806.jpg', caption: 'Campus Landscape', category: ['landscape'] },
+        { path: 'Graduation Picture Locations/BCC-RJM-2428.jpg', caption: 'Campus Building', category: ['landscape'] },
+        { path: 'Graduation Picture Locations/Armstrong-Hall.jpg', caption: 'Armstrong Hall', category: ['landscape'] },
+        { path: 'Graduation Picture Locations/Memorial-Union-RJM5693.jpg', caption: 'Memorial Union', category: ['landscape'] },
+        { path: 'Graduation Picture Locations/2023_GMB7706.jpg', caption: 'Campus Portrait', category: ['portrait'] },
+        { path: 'Graduation Picture Locations/Neil-Armstrong-Statue-RJM-.jpg', caption: 'Neil Armstrong Statue', category: ['landscape'] },
+        { path: 'Graduation Picture Locations/Gateway-Arch-RJW4331-Edit.jpg', caption: 'Gateway Arch', category: ['landscape'] }
     ];
     
     // Preload first few images for faster initial rendering
@@ -173,31 +373,51 @@ function initGallery() {
         preloadImg.src = images[i].path;
     }
     
-    // Create gallery items with virtualization
-    const renderVisibleItems = () => {
-        // Clear existing items to avoid duplicates during re-render
-        const existingItems = document.querySelectorAll('.gallery-item');
-        existingItems.forEach(item => {
-            const index = parseInt(item.getAttribute('data-index'));
-            if (index >= images.length) {
-                item.remove();
+    // Current active category filter
+    let activeCategory = 'all';
+    
+    // Filter images by category
+    const filterImages = (category) => {
+        activeCategory = category;
+        
+        // Clear gallery
+        gallery.innerHTML = '';
+        
+        // Filter images by category
+        const filteredImages = category === 'all' 
+            ? images 
+            : images.filter(image => image.category && image.category.includes(category));
+            
+        // Render the filtered images
+        renderImages(filteredImages);
+        
+        // Update active button
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(btn => {
+            if (btn.getAttribute('data-category') === category) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
             }
         });
+    };
+    
+    // Set up category button event listeners
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    categoryButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.getAttribute('data-category');
+            filterImages(category);
+        });
+    });
+    
+    // Create gallery items with virtualization
+    const renderImages = (imagesToRender) => {
+        // Clear existing items to avoid duplicates during re-render
+        gallery.innerHTML = '';
 
         // Determine a subset of images to render
-        images.forEach((image, index) => {
-            // Check if item already exists
-            const existingItem = document.querySelector(`.gallery-item[data-index="${index}"]`);
-            if (existingItem) {
-                const img = existingItem.querySelector('.gallery-image');
-                const spinner = existingItem.querySelector('.spinner');
-                
-                if (img && !img.dataset.loaded && isInLoadingRange(existingItem, index)) {
-                    loadImage(img, spinner, existingItem);
-                }
-                return;
-            }
-            
+        imagesToRender.forEach((image, index) => {
             // Create new item
             const item = document.createElement('div');
             item.className = 'gallery-item';
@@ -242,10 +462,13 @@ function initGallery() {
                 }
             }, 50 * Math.min(index, 10)); // Faster staggering, capped at 500ms
         });
+        
+        // Re-observe gallery items for infinite scroll
+        observeGalleryItems();
     };
     
-    // Initialize the gallery
-    renderVisibleItems();
+    // Initialize the gallery with all images
+    renderImages(images);
     
     // Check if element should load (viewport or priority)
     function isInLoadingRange(el, index) {
@@ -446,6 +669,14 @@ function closeLightbox() {
 
 function updateLightboxContent() {
     const items = document.querySelectorAll('.gallery-item');
+    
+    // Make sure we have valid items and index
+    if (items.length === 0 || currentIndex >= items.length) {
+        lightbox.classList.remove('loading');
+        closeLightbox();
+        return;
+    }
+    
     const currentItem = items[currentIndex];
     const img = currentItem.querySelector('.gallery-image');
     

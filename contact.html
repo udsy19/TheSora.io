@@ -3,26 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - TheSora.io</title>
+    <title>Contact Udaya - Photography Bookings - TheSora.io</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Book a photography session with Udaya Vijay Anand in West Lafayette, Indiana. Contact for portrait sessions, graduation photography, event coverage and more.">
+    <meta name="keywords" content="book photographer, photography bookings, contact photographer, West Lafayette photographer, photography sessions">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Contact Udaya - Photography Bookings - TheSora.io">
+    <meta property="og:description" content="Get in touch to book your photography session. Portrait sessions, graduation photography, event coverage and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thesora.io/contact.html">
+    <meta property="og:image" content="https://thesora.io/logo-typograph-black-text.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thesora.io/contact.html">
     <style>
         .contact-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
         .contact-header {
-            margin-bottom: 40px;
+            text-align: center;
+            margin: 3rem 0 4rem;
+            position: relative;
         }
         
         .contact-header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
             letter-spacing: -0.5px;
         }
         
@@ -30,110 +46,157 @@
             color: var(--text-secondary);
             font-size: 1.1rem;
             line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
-        .contact-content {
+        .contact-header:after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 2rem auto 0;
+        }
+        
+        .contact-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
+            margin-bottom: 60px;
         }
         
-        .contact-form {
-            margin-bottom: 40px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
+        .contact-card {
             background-color: var(--card-bg);
-            color: var(--text-primary);
-            transition: border-color var(--transition-speed) ease;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
         
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color var(--transition-speed) ease;
-        }
-        
-        .submit-btn:hover {
-            background-color: #000;
+        .contact-card h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .contact-info {
-            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
         
-        .contact-info h2 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-        
-        .contact-info p {
+        .info-item {
+            display: flex;
             margin-bottom: 15px;
-            color: var(--text-secondary);
+            align-items: flex-start;
         }
         
-        .contact-info a {
+        .info-icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+        
+        .info-content strong {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--text-primary);
+        }
+        
+        .info-content p {
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .info-content a {
             color: var(--accent);
             text-decoration: none;
+            transition: opacity 0.2s ease;
         }
         
-        .contact-info a:hover {
-            text-decoration: underline;
+        .info-content a:hover {
+            opacity: 0.8;
         }
         
-        .contact-image {
-            width: 100%;
-            aspect-ratio: 1/1;
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(var(--accent-rgb), 0.1);
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .calendly-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .calendly-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .calendly-header h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .calendly-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .calendly-container {
+            border-radius: 12px;
             overflow: hidden;
-            margin-top: 30px;
-        }
-        
-        .contact-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         @media (max-width: 768px) {
-            .contact-content {
+            .contact-options {
                 grid-template-columns: 1fr;
+            }
+            
+            .contact-header h1 {
+                font-size: 2.4rem;
             }
         }
     </style>
@@ -156,10 +219,11 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html">Gallery</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
             </ul>
         </nav>
         <div class="menu-toggle">
@@ -172,23 +236,105 @@
         <div class="contact-container">
             <div class="contact-header">
                 <h1>Get in Touch</h1>
-                <p>For inquiries, collaborations, or just to say hello.</p>
+                <p>For inquiries, collaborations, or just to say hello. I'd love to hear from you!</p>
             </div>
             
-            <div class="contact-content">
-                <div class="contact-info" style="grid-column: span 2;">
-                    <h2>Contact Information</h2>
-                    <p>Feel free to reach out for photography inquiries, collaborations, or just to say hello.</p>
-                    
-                    <div style="margin: 30px 0; padding: 30px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--card-bg);">
-                        <p style="font-size: 1.1rem; margin-bottom: 20px;"><strong>Udaya Vijay Anand</strong></p>
-                        <p><strong>Email:</strong> <a href="mailto:uvijayan@purdue.edu">uvijayan@purdue.edu</a></p>
-                        <p><strong>Phone:</strong> +1 774-519-8830</p>
-                        <p><strong>Instagram:</strong> <a href="https://instagram.com/udsyx" target="_blank">@udsyx</a></p>
-                        <p><strong>Snapchat:</strong> @udsyx</p>
-                        <p style="margin-top: 15px;">Available for commissioned work, collaborations, and exhibitions.</p>
+            <div class="contact-options">
+                <div class="contact-card">
+                    <h2>📧 Contact Information</h2>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <div class="info-icon">👋</div>
+                            <div class="info-content">
+                                <strong>Udaya Vijay Anand</strong>
+                                <p>Student & Freelance Photographer</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📧</div>
+                            <div class="info-content">
+                                <strong>Email</strong>
+                                <p><a href="mailto:uvijayan@purdue.edu">uvijayan@purdue.edu</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📱</div>
+                            <div class="info-content">
+                                <strong>Phone</strong>
+                                <p><a href="tel:+17745198830">+1 774-519-8830</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div class="info-content">
+                                <strong>Location</strong>
+                                <p>West Lafayette, Indiana</p>
+                            </div>
+                        </div>
                     </div>
                     
+                    <div class="social-links">
+                        <a href="https://instagram.com/udsyx" target="_blank" class="social-link">📸</a>
+                        <a href="#" class="social-link">👻</a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h2>📸 Photography Inquiries</h2>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <div class="info-icon">🎓</div>
+                            <div class="info-content">
+                                <strong>Graduation Sessions</strong>
+                                <p>Celebrate your milestone with a personalized photoshoot.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">👥</div>
+                            <div class="info-content">
+                                <strong>Group & Community Photos</strong>
+                                <p>Perfect for teams, clubs, fraternities, and sororities.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">🖼️</div>
+                            <div class="info-content">
+                                <strong>Portfolio Building</strong>
+                                <p>Creative collaborations and editorial shoots.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📆</div>
+                            <div class="info-content">
+                                <strong>Availability</strong>
+                                <p>Bookings are currently open for sessions starting in June 2025.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px">
+                        <a href="pricing.html" class="cta-button" style="background-color: var(--accent); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; display: inline-block; font-weight: 500; transition: all 0.3s ease;">View Photography Services</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="calendly-section">
+                <div class="calendly-header">
+                    <h2>☕ Book a Coffee Chat</h2>
+                    <p>Want to discuss your photography needs in person? Schedule a 30-minute coffee chat with me using the calendar below.</p>
+                </div>
+                
+                <div class="calendly-container">
+                    <!-- Calendly inline widget begin -->
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/udayatejas2004/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=1a1a1a" style="min-width:320px;height:700px;"></div>
+                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                    <!-- Calendly inline widget end -->
                 </div>
             </div>
         </div>
@@ -196,10 +342,47 @@
 
     <footer>
         <div class="footer-content">
-            <p>© 2025 TheSora.io. All rights reserved.</p>
-            <p>Created by Udaya Vijay Anand</p>
-            <p>Contact: <a href="mailto:uvijayan@purdue.edu">uvijayan@purdue.edu</a> | +1 774-519-8830</p>
-            <p>Social: <a href="https://instagram.com/udsyx" target="_blank">Instagram</a> | Snapchat: @udsyx</p>
+            <div class="footer-column">
+                <h3>TheSora.io</h3>
+                <p>Capturing moments and telling stories through the lens.</p>
+                <p>Based in West Lafayette, Indiana</p>
+                <div class="footer-social">
+                    <a href="https://instagram.com/udsyx" target="_blank">📸</a>
+                    <a href="#" target="_blank">👻</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="pricing.html">Individual Sessions</a></li>
+                    <li><a href="pricing.html">Graduate Photography</a></li>
+                    <li><a href="pricing.html">Group & Community Packages</a></li>
+                    <li><a href="pricing.html">Add-ons & Extras</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <p><strong>Email:</strong> <a href="mailto:uvijayan@purdue.edu" class="footer-links">uvijayan@purdue.edu</a></p>
+                <p><strong>Phone:</strong> +1 774-519-8830</p>
+                <p><a href="contact.html" class="footer-links">Book a coffee chat</a></p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 TheSora.io. All rights reserved. Created by Udaya Vijay Anand</p>
+            </div>
         </div>
     </footer>
 

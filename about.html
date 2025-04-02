@@ -7,56 +7,393 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* About page specific styles */
         .about-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
+            width: 100%;
+            overflow: hidden;
         }
         
-        .about-header {
-            margin-bottom: 40px;
+        .about-hero {
+            height: 100vh;
+            width: 100%;
+            background-color: var(--background);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem;
         }
         
-        .about-header h1 {
-            font-size: 2.5rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+        .ambient-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
         }
         
-        .about-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.6;
+        .ambient-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.5;
+            mix-blend-mode: normal;
+            will-change: transform;
         }
         
-        .about-content {
+        .circle-1 {
+            width: 60vh;
+            height: 60vh;
+            background: linear-gradient(
+                135deg, 
+                rgba(var(--accent-rgb), 0.15) 0%, 
+                rgba(var(--accent-rgb), 0.05) 100%
+            );
+            top: -20vh;
+            left: -20vh;
+            animation: floatSlow 30s infinite alternate ease-in-out;
+        }
+        
+        .circle-2 {
+            width: 80vh;
+            height: 80vh;
+            background: linear-gradient(
+                135deg, 
+                rgba(var(--accent-rgb), 0.08) 0%, 
+                rgba(var(--accent-rgb), 0.02) 100%
+            );
+            bottom: -40vh;
+            left: 20vw;
+            animation: floatSlow 40s infinite alternate-reverse ease-in-out;
+        }
+        
+        .circle-3 {
+            width: 70vh;
+            height: 70vh;
+            background: linear-gradient(
+                135deg, 
+                rgba(var(--accent-rgb), 0.1) 0%, 
+                rgba(var(--accent-rgb), 0.03) 100%
+            );
+            top: 20vh;
+            right: -30vh;
+            animation: floatSlow 35s infinite alternate ease-in-out;
+        }
+        
+        .noise-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes floatSlow {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(50px, 25px) rotate(5deg);
+            }
+            100% {
+                transform: translate(-20px, -30px) rotate(-3deg);
+            }
+        }
+        
+        .hero-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 4rem;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            height: 75vh;
+            align-items: center;
+            position: relative;
+            z-index: 5;
         }
         
-        .about-text {
+        .hero-media {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-50px);
+            opacity: 0;
+            animation: slideInLeft 1s ease-out 0.3s forwards;
+        }
+        
+        @keyframes slideInLeft {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .hero-image-container {
+            width: 70%;
+            height: 80%;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.2);
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .hero-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .background-shape {
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            width: 75%;
+            height: 85%;
+            background-color: var(--accent);
+            z-index: 1;
+            border-radius: 4px;
+            opacity: 0.1;
+            transform: rotate(-5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-media:hover .background-shape {
+            transform: rotate(0deg) translateX(10px);
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            transform: translateX(50px);
+            opacity: 0;
+            animation: slideInRight 1s ease-out 0.5s forwards;
+        }
+        
+        @keyframes slideInRight {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            position: relative;
+        }
+        
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .hero-description {
+            margin-bottom: 2.5rem;
+        }
+        
+        .hero-description p {
+            font-size: 1.1rem;
             line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
         
-        .about-text p {
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-link {
+            padding: 0.5rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transform-origin: right center;
+            transition: transform 0.4s ease;
+        }
+        
+        .social-link:hover {
+            color: var(--accent);
+        }
+        
+        .social-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left center;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.2s forwards;
+        }
+        
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background-color: var(--text-secondary);
+            position: relative;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: var(--accent);
+            animation: scrollDown 2s infinite;
+        }
+        
+        @keyframes scrollDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(200%); }
+        }
+        
+        .scroll-indicator span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+        
+        .about-story {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .about-story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-story-text {
+            position: relative;
+        }
+        
+        .about-story-text h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .about-story-text h2::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .about-story-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
             margin-bottom: 20px;
         }
         
-        .about-text h2 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
+        .about-profile {
+            position: relative;
+            z-index: 1;
+            perspective: 1000px;
+        }
+        
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease, box-shadow 0.8s ease;
+        }
+        
+        .profile-card:hover {
+            box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+        }
+        
+        .profile-header {
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            transform-style: preserve-3d;
         }
         
         .profile-image {
-            width: 100%;
-            aspect-ratio: 4/5;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
             overflow: hidden;
+            margin: 0 auto 30px;
+            border: 5px solid var(--background);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateZ(30px);
         }
         
         .profile-image img {
@@ -65,23 +402,520 @@
             object-fit: cover;
         }
         
+        .profile-title {
+            margin-bottom: 10px;
+            transform: translateZ(20px);
+        }
+        
+        .profile-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            transform: translateZ(15px);
+        }
+        
+        .profile-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            transform: translateZ(15px);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--background);
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            background-color: var(--accent);
+            color: var(--background);
+        }
+        
+        .profile-content {
+            padding: 30px 40px 40px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .profile-info {
+            margin-bottom: 30px;
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .info-icon {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .info-text {
+            color: var(--text-secondary);
+        }
+        
+        .quote-section {
+            padding: 120px 40px;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            background-image: url('Graduation Picture Locations/Bell-Tower-RJM-2923.jpg');
+        }
+        
+        .quote-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .quote-container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+        }
+        
+        .quote-text {
+            font-size: 2.5rem;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        
+        .quote-author {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .journey-section {
+            padding: 100px 20px;
+            background-color: var(--card-bg);
+        }
+        
+        .journey-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background-color: var(--accent);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 50px;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            transform: translateX(-30px);
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(30px);
+        }
+        
+        .timeline-item.visible:nth-child(odd) {
+            transform: translateX(0);
+        }
+        
+        .timeline-item.visible:nth-child(even) {
+            transform: translateX(0);
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: var(--background);
+            border: 4px solid var(--accent);
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd):before {
+            right: -14px;
+        }
+        
+        .timeline-item:nth-child(even):before {
+            left: -14px;
+        }
+        
+        /* Timeline mobile optimization */
         @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
+            .timeline:before {
+                left: 30px;
             }
             
-            .about-text {
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 20px;
+            }
+            
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+                transform: translateX(-30px);
+            }
+            
+            .timeline-item.visible:nth-child(odd),
+            .timeline-item.visible:nth-child(even) {
+                transform: translateX(0);
+            }
+            
+            .timeline-item:before,
+            .timeline-item:nth-child(odd):before,
+            .timeline-item:nth-child(even):before {
+                left: 16px;
+                right: auto;
+            }
+            
+            .timeline-content {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .timeline-item {
+                padding-left: 60px;
+                padding-right: 10px;
+            }
+            
+            .timeline:before {
+                left: 20px;
+            }
+            
+            .timeline-item:before,
+            .timeline-item:nth-child(odd):before,
+            .timeline-item:nth-child(even):before {
+                left: 6px;
+                width: 16px;
+                height: 16px;
+            }
+        }
+        
+        .timeline-content {
+            background-color: var(--background);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .skills-section {
+            padding: 100px 20px;
+        }
+        
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .skills-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .skills-header h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .skills-header p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .skill-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .skill-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            height: 120px;
+            background-color: rgba(var(--accent-rgb), 0.05);
+        }
+        
+        .skill-content {
+            padding: 30px;
+        }
+        
+        .skill-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .skill-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                height: auto;
+            }
+            
+            .hero-media {
+                height: 50vh;
+                max-height: 500px;
+            }
+            
+            .hero-image-container {
+                width: 60%;
+                height: 90%;
+                margin: 0 auto;
+            }
+            
+            .hero-content {
+                text-align: center;
+                padding: 0 1rem;
+            }
+            
+            .hero-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-description p {
+                font-size: 1rem;
+            }
+            
+            .about-story-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .about-story-text {
                 order: 2;
             }
             
-            .profile-image {
+            .about-profile {
                 order: 1;
+                max-width: 90%;
+                margin: 0 auto;
+            }
+            
+            .about-story-text h2 {
+                font-size: 2rem;
+            }
+            
+            .about-story-text h2::after {
+                width: 40px;
+            }
+            
+            .quote-text {
+                font-size: 1.8rem;
+                padding: 0 15px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+            
+            .skill-card {
+                min-height: auto;
+            }
+            
+            .skill-icon {
+                height: 80px;
+            }
+            
+            .skill-content {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+            
+            .journey-section {
+                padding: 60px 10px;
+            }
+            
+            .skills-section {
+                padding: 60px 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-media {
+                height: 40vh;
+            }
+            
+            .hero-image-container {
+                width: 80%;
+            }
+            
+            .profile-header {
+                padding: 25px 15px;
+            }
+            
+            .profile-image {
+                width: 140px;
+                height: 140px;
+                margin-bottom: 20px;
+            }
+            
+            .profile-content {
+                padding: 20px 15px 25px;
+            }
+            
+            .quote-text {
+                font-size: 1.4rem;
+            }
+            
+            .feature-card, .skill-card {
+                padding: 20px;
             }
         }
     </style>
     
     <!-- Vercel Analytics -->
     <script defer src="/_vercel/insights/script.js"></script>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Meet Udaya Vijay Anand, a professional photographer based in West Lafayette, Indiana. Explore my journey, expertise and photography philosophy.">
+    <meta name="keywords" content="photographer bio, Udaya Vijay Anand, photography journey, portrait photographer, West Lafayette photographer">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="About Udaya - TheSora.io Photography">
+    <meta property="og:description" content="Learn about Udaya Vijay Anand's photography journey and expertise in portrait, graduation, and event photography.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thesora.io/about.html">
+    <meta property="og:image" content="https://thesora.io/Udaya_About_Picture.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thesora.io/about.html">
 </head>
 <body>
     <div class="loader">
@@ -89,6 +923,7 @@
             <img src="Logo.png" alt="TheSora.io Logo" class="loader-logo-image">
         </div>
     </div>
+    
     <header>
         <div class="logo">
             <a href="index.html">
@@ -98,8 +933,9 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html">Gallery</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html" class="active">About</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -110,42 +946,314 @@
         </div>
     </header>
 
-    <main>
-        <div class="about-container">
-            <div class="about-header">
-                <h1>About TheSora.io</h1>
-                <p>A visual journey through moments captured with intention.</p>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Our Vision</h2>
-                    <p>TheSora.io is a minimalist photography portfolio showcasing a curated collection of images. The platform is designed to present photography in its purest form, without distraction.</p>
-                    
-                    <p>Each image tells its own story, captured through a unique perspective that highlights the beauty in everyday moments and extraordinary experiences alike.</p>
-                    
-                    <h2>The Creator</h2>
-                    <p>Udaya Vijay Anand is a photographer and visual artist with a passion for storytelling through imagery. With a focus on minimalist aesthetics and emotional resonance, each photograph is carefully selected to convey a specific feeling or narrative.</p>
-                    
-                    <p>For inquiries about prints, collaborations, or commissioned work, please visit the contact page.</p>
+    <main class="about-container">
+        <section class="about-story">
+            <div class="about-story-container">
+                <div class="about-story-text">
+                    <h2>Meet The Photographer</h2>
+                    <p>My journey in photography began in 2018 when my uncle took me on a photography trip and generously gave me his camera. That moment sparked a creative passion that has only grown stronger over the years.</p>
+                    <p>I believe that photography is more than just capturing images—it's about preserving moments, telling stories, and creating tangible memories of the fleeting experiences that make up our lives.</p>
+                    <p>My approach focuses on authenticity and connection. Whether I'm photographing a graduation milestone, a creative portrait session, or documenting special events, I strive to capture genuine emotions and create images that resonate with depth and meaning.</p>
+                    <p>When I'm not behind the camera, I'm constantly exploring new techniques, learning new skills, and finding inspiration in the world around me.</p>
                 </div>
                 
-                <div class="profile-image">
-                    <img src="Udaya_About_Picture.png" alt="Udaya Vijay Anand" />
+                <div class="about-profile">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-image">
+                                <img src="Udaya_About_Picture.png" alt="Udaya Vijay Anand">
+                            </div>
+                            <h3 class="profile-title">Udaya Vijay Anand</h3>
+                            <p class="profile-subtitle">Photographer & Visual Storyteller</p>
+                            <div class="profile-socials">
+                                <a href="https://instagram.com/udsyx" target="_blank" class="social-icon">📸</a>
+                                <a href="mailto:uvijayan@purdue.edu" class="social-icon">✉️</a>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-content">
+                            <div class="profile-info">
+                                <div class="info-item">
+                                    <div class="info-icon">📍</div>
+                                    <div class="info-text">Based in West Lafayette, Indiana</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon">🎓</div>
+                                    <div class="info-text">Student at Purdue University</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon">💼</div>
+                                    <div class="info-text">Freelance Photographer</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon">✉️</div>
+                                    <div class="info-text">uvijayan@purdue.edu</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+        
+        <section class="quote-section">
+            <div class="quote-overlay"></div>
+            <div class="quote-container">
+                <div class="quote-text">"Photography is the story I fail to put into words."</div>
+                <div class="quote-author">— Destin Sparks</div>
+            </div>
+        </section>
+        
+        <section class="journey-section">
+            <div class="journey-container">
+                <div class="timeline">
+                    <div class="timeline-item" data-year="2018">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2018</div>
+                            <h3 class="timeline-title">Where It All Began</h3>
+                            <p class="timeline-desc">Started my photography journey when my uncle took me on a photography trip and gave me his camera, which sparked my fascination with visual storytelling.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-year="2019">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2019</div>
+                            <h3 class="timeline-title">Building Foundations</h3>
+                            <p class="timeline-desc">Attended my first photography course on the Basics of Photography in Chennai, establishing a strong foundation in technical skills.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-year="2020">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2020</div>
+                            <h3 class="timeline-title">Expanding Horizons</h3>
+                            <p class="timeline-desc">Completed certification and 150 hours of flight time to become a certified drone pilot under DJI. Nominated for Best Photographer of the Year at Kodaikanal International School (KIS).</p>
+                            <p class="timeline-desc">Completed Intermediate level Photoshop and Lightroom certification, enhancing my post-processing abilities.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-year="2021">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2021</div>
+                            <h3 class="timeline-title">Mastering the Craft</h3>
+                            <p class="timeline-desc">Earned certification in studio light portraits and another in Composition and Negative Spaces. Nominated for Sony Youth recognition. Served as head photographer for the 2020-2021 yearbook.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-year="2022">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2022</div>
+                            <h3 class="timeline-title">Professional Recognition</h3>
+                            <p class="timeline-desc">Had images published in the KIS Alumni Magazine. Continued as head photographer for the 2021-2022 yearbook. Third consecutive nomination for Photographer of the Year at KIS.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="skills-section">
+            <div class="skills-container">
+                <div class="skills-header">
+                    <h2>Skills & Expertise</h2>
+                    <p>Areas of specialized knowledge and technical abilities that define my photography style.</p>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-card" data-delay="0">
+                        <div class="skill-icon">📸</div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Portrait Photography</h3>
+                            <p class="skill-desc">Specialized in creating authentic, emotive portraits that capture the unique personality and essence of individuals. Skilled in natural light, studio setups, and environmental portraiture.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-delay="200">
+                        <div class="skill-icon">🚁</div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Drone Photography</h3>
+                            <p class="skill-desc">Certified drone pilot with expertise in aerial photography, providing unique perspectives and stunning landscapes from above, enhancing storytelling capabilities.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-delay="400">
+                        <div class="skill-icon">📷</div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Event Photography</h3>
+                            <p class="skill-desc">Experienced in capturing the key moments, emotions, and details of various events, from intimate gatherings to large celebrations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-delay="600">
+                        <div class="skill-icon">💻</div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Post-Processing</h3>
+                            <p class="skill-desc">Certified in Adobe Photoshop and Lightroom with intermediate to advanced skills in photo editing, color grading, and image enhancement without losing authenticity.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-delay="800">
+                        <div class="skill-icon">💡</div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Studio Lighting</h3>
+                            <p class="skill-desc">Professional training in studio lighting setups, manipulating light to create mood, dimension, and visual interest in controlled environments.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-delay="1000">
+                        <div class="skill-icon">🖼️</div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Composition</h3>
+                            <p class="skill-desc">Advanced understanding of compositional techniques, including the use of negative space, leading lines, and framing to create visually compelling and balanced images.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
         <div class="footer-content">
-            <p>© 2025 TheSora.io. All rights reserved.</p>
-            <p>Created by Udaya Vijay Anand</p>
-            <p>Contact: <a href="mailto:uvijayan@purdue.edu">uvijayan@purdue.edu</a> | +1 774-519-8830</p>
-            <p>Social: <a href="https://instagram.com/udsyx" target="_blank">Instagram</a> | Snapchat: @udsyx</p>
+            <div class="footer-column">
+                <h3>TheSora.io</h3>
+                <p>Capturing moments and telling stories through the lens.</p>
+                <p>Based in West Lafayette, Indiana</p>
+                <div class="footer-social">
+                    <a href="https://instagram.com/udsyx" target="_blank">📸</a>
+                    <a href="#" target="_blank">👻</a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="pricing.html">Individual Sessions</a></li>
+                    <li><a href="pricing.html">Graduate Photography</a></li>
+                    <li><a href="pricing.html">Group & Community Packages</a></li>
+                    <li><a href="pricing.html">Add-ons & Extras</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <p><strong>Email:</strong> <a href="mailto:uvijayan@purdue.edu" class="footer-links">uvijayan@purdue.edu</a></p>
+                <p><strong>Phone:</strong> +1 774-519-8830</p>
+                <p><a href="contact.html" class="footer-links">Book a coffee chat</a></p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 TheSora.io. All rights reserved. Created by Udaya Vijay Anand</p>
+            </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update CSS variable for background to enable rgba calculations
+            const root = document.documentElement;
+            const computedStyle = getComputedStyle(root);
+            const backgroundColor = computedStyle.getPropertyValue('--background').trim();
+            
+            // Extract RGB values from background color
+            let r, g, b;
+            if (backgroundColor.startsWith('#')) {
+                const hex = backgroundColor.replace('#', '');
+                r = parseInt(hex.substr(0, 2), 16);
+                g = parseInt(hex.substr(2, 2), 16);
+                b = parseInt(hex.substr(4, 2), 16);
+            } else if (backgroundColor.startsWith('rgb')) {
+                const rgb = backgroundColor.match(/\d+/g);
+                r = parseInt(rgb[0]);
+                g = parseInt(rgb[1]);
+                b = parseInt(rgb[2]);
+            } else {
+                // Default fallback if parsing fails
+                r = 255;
+                g = 255;
+                b = 255;
+            }
+            
+            root.style.setProperty('--background-rgb', `${r}, ${g}, ${b}`);
+            
+            // Animate timeline items on scroll
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const skillCards = document.querySelectorAll('.skill-card');
+            
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        timelineObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            const skillObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const card = entry.target;
+                        const delay = parseInt(card.getAttribute('data-delay')) || 0;
+                        
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                        }, delay);
+                        
+                        skillObserver.unobserve(card);
+                    }
+                });
+            }, observerOptions);
+            
+            timelineItems.forEach(item => timelineObserver.observe(item));
+            skillCards.forEach(card => skillObserver.observe(card));
+            
+            // Optimized parallax with requestAnimationFrame
+            let scrollTicking = false;
+            let lastScrollPosition = 0;
+            
+            function handleScroll() {
+                lastScrollPosition = window.pageYOffset;
+                
+                if (!scrollTicking) {
+                    window.requestAnimationFrame(() => {
+                        updateScrollParallax(lastScrollPosition);
+                        scrollTicking = false;
+                    });
+                    
+                    scrollTicking = true;
+                }
+            }
+            
+            function updateScrollParallax(scrollPosition) {
+                // Parallax for quote section
+                const quoteSection = document.querySelector('.quote-section');
+                if (quoteSection) {
+                    const quoteSectionPos = quoteSection.getBoundingClientRect();
+                    if (quoteSectionPos.top < window.innerHeight && quoteSectionPos.bottom > 0) {
+                        const parallaxOffset = (window.innerHeight - quoteSectionPos.top) * 0.1;
+                        quoteSection.style.backgroundPositionY = `calc(50% + ${parallaxOffset}px)`;
+                    }
+                }
+            }
+            
+            // Throttled scroll handler with passive flag for better performance
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        });
+    </script>
 </body>
 </html>

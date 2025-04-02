@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - TheSora.io</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <div class="loader">
+        <div class="loader-logo">
+            <img src="Logo.png" alt="TheSora.io Logo" class="loader-logo-image">
+        </div>
+    </div>
+    
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo-typograph-black-text.png" alt="TheSora.io" class="logo-text light-mode-logo">
+                <img src="logo-typograph-white-text.png" alt="TheSora.io" class="logo-text dark-mode-logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <main>
+        <div class="category-filter-container">
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">All Photos</button>
+                <button class="category-btn" data-category="portrait">Portrait Sessions</button>
+                <button class="category-btn" data-category="graduate">Graduate Sessions</button>
+                <button class="category-btn" data-category="themed">Themed Photoshoots</button>
+                <button class="category-btn" data-category="event">Event Photography</button>
+                <button class="category-btn" data-category="landscape">Landscapes</button>
+                <button class="category-btn" data-category="travel">Travel</button>
+            </div>
+            <div class="filter-indicator">
+                <div class="filter-arrow"></div>
+            </div>
+        </div>
+        <div class="gallery" id="gallery">
+            <!-- Images will be loaded via JavaScript -->
+        </div>
+    </main>
+
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="Lightbox image" id="lightbox-img">
+            <div class="lightbox-caption"></div>
+        </div>
+        <div class="lightbox-controls">
+            <button class="prev-btn">←</button>
+            <button class="close-btn">×</button>
+            <button class="next-btn">→</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 TheSora.io. All rights reserved.</p>
+            <p>Created by Udaya Vijay Anand</p>
+            <p>Contact: <a href="mailto:uvijayan@purdue.edu">uvijayan@purdue.edu</a> | +1 774-519-8830</p>
+            <p>Social: <a href="https://instagram.com/udsyx" target="_blank">Instagram</a> | Snapchat: @udsyx</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
