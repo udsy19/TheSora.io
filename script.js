@@ -353,17 +353,17 @@ function initGallery() {
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-270.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-290.jpg', caption: 'Themed Shoot', category: ['themed'] },
         
-        // Additional campus images
-        { path: 'Graduation Picture Locations/2023_KAL_4724.jpg', caption: 'Campus View', category: ['landscape'] },
-        { path: 'Graduation Picture Locations/2022_JU19977.jpg', caption: 'Campus Portrait', category: ['portrait'] },
-        { path: 'Graduation Picture Locations/Bell-Tower-RJM4289.jpg', caption: 'Bell Tower', category: ['landscape'] },
-        { path: 'Graduation Picture Locations/2023_KAL_4806.jpg', caption: 'Campus Landscape', category: ['landscape'] },
-        { path: 'Graduation Picture Locations/BCC-RJM-2428.jpg', caption: 'Campus Building', category: ['landscape'] },
-        { path: 'Graduation Picture Locations/Armstrong-Hall.jpg', caption: 'Armstrong Hall', category: ['landscape'] },
-        { path: 'Graduation Picture Locations/Memorial-Union-RJM5693.jpg', caption: 'Memorial Union', category: ['landscape'] },
-        { path: 'Graduation Picture Locations/2023_GMB7706.jpg', caption: 'Campus Portrait', category: ['portrait'] },
-        { path: 'Graduation Picture Locations/Neil-Armstrong-Statue-RJM-.jpg', caption: 'Neil Armstrong Statue', category: ['landscape'] },
-        { path: 'Graduation Picture Locations/Gateway-Arch-RJW4331-Edit.jpg', caption: 'Gateway Arch', category: ['landscape'] }
+        // Additional Portrait Sessions
+        { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', caption: 'Creative Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA02098.jpg', caption: 'Portrait Series', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_5.jpg', caption: 'Studio Session', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA02907.jpg', caption: 'Outdoor Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA03192.jpg', caption: 'Lifestyle Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_130.jpg', caption: 'Fashion Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_14.jpg', caption: 'Creative Session', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA02145.jpg', caption: 'Natural Light Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg', caption: 'Studio Session', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/UVA03271.jpg', caption: 'Portrait Series', category: ['portrait'] }
     ];
     
     // Preload first few images for faster initial rendering
