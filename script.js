@@ -363,34 +363,74 @@ function initGallery() {
         
         // Themed Photoshoots
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-124.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-132.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-163.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-186.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-188.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-202.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-206.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-230.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-257.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-262.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-266.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-270.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-284.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-290.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-294.jpg', caption: 'Themed Shoot', category: ['themed'] },
         
         // Event Photography - Holi Festival
+        { path: 'Gallery Pictures/Event Photography/Holi-002.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-003.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-004.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-006.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-007.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-011.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-018.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-020.jpg', caption: 'Color Festival', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-022.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-023.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-024.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-026.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-027.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-033.jpg', caption: 'Festival of Colors', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-036.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-045.jpg', caption: 'Color Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-048.jpg', caption: 'Color Festival', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-053.jpg', caption: 'Holi Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-057.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-058.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-059.jpg', caption: 'Holi Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-088.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-090.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-105.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-106.jpg', caption: 'Holi Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-115.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-120.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-128.jpg', caption: 'Holi Festival', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-139.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-148.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-151.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-158.jpg', caption: 'Color Festival', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-164.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-170.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-172.jpg', caption: 'Holi Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-179.jpg', caption: 'Color Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-181.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-183.jpg', caption: 'Festival of Colors', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-187.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-194.jpg', caption: 'Color Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-201.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-206.jpg', caption: 'Holi Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-215.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-222.jpg', caption: 'Color Festival', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-228.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-234.jpg', caption: 'Holi Festival', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-254.jpg', caption: 'Holi Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-264.jpg', caption: 'Festival of Colors', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-281.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-291.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-298.jpg', caption: 'Holi Celebration', category: ['event'] },
         { path: 'Gallery Pictures/Event Photography/Holi-299.jpg', caption: 'Color Celebration', category: ['event'] },
         
         // Additional Portrait Sessions
@@ -458,7 +498,13 @@ function initGallery() {
 
         // Limit number of images to render at once on mobile to prevent crashes
         const isMobile = window.innerWidth <= 768;
-        const initialRenderCount = isMobile ? 15 : imagesToRender.length;
+        // On mobile, be very conservative (15 images)
+        // On tablet, show more (30 images)
+        // On desktop, show all or up to 60 at a time
+        const initialRenderCount = 
+            isMobile ? 15 : 
+            window.innerWidth <= 1024 ? 30 : 
+            Math.min(60, imagesToRender.length);
         const imagesToRenderInitially = imagesToRender.slice(0, initialRenderCount);
         
         // Determine a subset of images to render
@@ -515,7 +561,8 @@ function initGallery() {
             
             const loadMoreBtn = document.createElement('button');
             loadMoreBtn.className = 'load-more-btn';
-            loadMoreBtn.textContent = 'Load More Images';
+            const remainingImages = imagesToRender.length - initialRenderCount;
+            loadMoreBtn.textContent = `Load More (${remainingImages} images)`;
             loadMoreBtn.addEventListener('click', function() {
                 // Remove the load more button
                 loadMoreContainer.remove();
