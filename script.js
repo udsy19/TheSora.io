@@ -320,13 +320,33 @@ function initTestimonialSlider() {
 function initGallery() {
     const gallery = document.getElementById('gallery');
     const images = [
-        // Portrait Sessions
+        // Portrait Sessions - Updated with new jpg images
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_105.jpg', caption: 'Fall Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_108.jpg', caption: 'Fall Collection', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_109.jpg', caption: 'Autumn Vibes', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_111.jpg', caption: 'Fall Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_114.jpg', caption: 'Autumn Collection', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_119.jpg', caption: 'Fall Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_121.jpg', caption: 'Fall Portrait Series', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg', caption: 'Fall Portrait', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_138.jpg', caption: 'Fall Collection', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_155.jpg', caption: 'Autumn Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_168.jpg', caption: 'Fall Fashion', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_171.jpg', caption: 'Autumn Collection', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_173.jpg', caption: 'Fall Portrait Series', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_174.jpg', caption: 'Autumn Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_177.jpg', caption: 'Fall Fashion', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_184.jpg', caption: 'Autumn Collection', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_185.jpg', caption: 'Fall Portrait', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_202.jpg', caption: 'Autumn Vibes', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_203.jpg', caption: 'Fall Portrait', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_208.jpg', caption: 'Autumn Collection', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_238.jpg', caption: 'Fall Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_26.jpg', caption: 'Fall Portrait Series', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_28.jpg', caption: 'Autumn Collection', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_41.jpg', caption: 'Fall Portrait', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_42.jpg', caption: 'Fall Fashion', category: ['portrait'] },
+        { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_79.jpg', caption: 'Autumn Portrait', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/UVA02861.jpg', caption: 'Portrait', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/UVA03304.jpg', caption: 'Portrait', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/UVA03409.jpg', caption: 'Portrait Series', category: ['portrait'] },
@@ -352,6 +372,26 @@ function initGallery() {
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-266.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-270.jpg', caption: 'Themed Shoot', category: ['themed'] },
         { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-290.jpg', caption: 'Themed Shoot', category: ['themed'] },
+        
+        // Event Photography - Holi Festival
+        { path: 'Gallery Pictures/Event Photography/Holi-022.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-036.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-048.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-053.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-057.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-088.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-115.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-139.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-164.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-179.jpg', caption: 'Color Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-187.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-201.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-215.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-228.jpg', caption: 'Color Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-254.jpg', caption: 'Holi Celebration', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-264.jpg', caption: 'Festival of Colors', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-281.jpg', caption: 'Holi Festival', category: ['event'] },
+        { path: 'Gallery Pictures/Event Photography/Holi-299.jpg', caption: 'Color Celebration', category: ['event'] },
         
         // Additional Portrait Sessions
         { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', caption: 'Creative Portrait', category: ['portrait'] },
@@ -416,8 +456,13 @@ function initGallery() {
         // Clear existing items to avoid duplicates during re-render
         gallery.innerHTML = '';
 
+        // Limit number of images to render at once on mobile to prevent crashes
+        const isMobile = window.innerWidth <= 768;
+        const initialRenderCount = isMobile ? 15 : imagesToRender.length;
+        const imagesToRenderInitially = imagesToRender.slice(0, initialRenderCount);
+        
         // Determine a subset of images to render
-        imagesToRender.forEach((image, index) => {
+        imagesToRenderInitially.forEach((image, index) => {
             // Create new item
             const item = document.createElement('div');
             item.className = 'gallery-item';
@@ -463,6 +508,93 @@ function initGallery() {
             }, 50 * Math.min(index, 10)); // Faster staggering, capped at 500ms
         });
         
+        // If we have more images to load on mobile, add a "Load More" button
+        if (isMobile && imagesToRender.length > initialRenderCount) {
+            const loadMoreContainer = document.createElement('div');
+            loadMoreContainer.className = 'load-more-container';
+            
+            const loadMoreBtn = document.createElement('button');
+            loadMoreBtn.className = 'load-more-btn';
+            loadMoreBtn.textContent = 'Load More Images';
+            loadMoreBtn.addEventListener('click', function() {
+                // Remove the load more button
+                loadMoreContainer.remove();
+                
+                // Load the next batch of images
+                const nextBatch = imagesToRender.slice(initialRenderCount);
+                let batchCount = 0;
+                
+                // Load images in smaller batches to prevent crashing
+                function loadNextBatchPart() {
+                    const start = batchCount * 10;
+                    const end = Math.min(start + 10, nextBatch.length);
+                    const batchPart = nextBatch.slice(start, end);
+                    
+                    // Add this batch of images
+                    batchPart.forEach((image, batchIndex) => {
+                        const globalIndex = initialRenderCount + start + batchIndex;
+                        
+                        // Create new item
+                        const item = document.createElement('div');
+                        item.className = 'gallery-item';
+                        item.setAttribute('data-index', globalIndex);
+                        
+                        // Create blur-up loading effect
+                        const placeholderBg = document.createElement('div');
+                        placeholderBg.className = 'placeholder-bg';
+                        item.appendChild(placeholderBg);
+                        
+                        // Create image with lazy loading
+                        const img = new Image();
+                        img.alt = image.caption;
+                        img.loading = 'lazy'; 
+                        img.className = 'gallery-image';
+                        img.dataset.src = image.path;
+                        img.style.opacity = '0';
+                        
+                        // Create loading spinner
+                        const spinner = document.createElement('div');
+                        spinner.className = 'spinner';
+                        item.appendChild(spinner);
+                        
+                        // Add to DOM
+                        item.appendChild(img);
+                        gallery.appendChild(item);
+                        
+                        // Open lightbox on click
+                        item.addEventListener('click', function() {
+                            if (!item.classList.contains('loading')) {
+                                openLightbox(globalIndex);
+                            }
+                        });
+                        
+                        // Add animation and load image
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                            if (isInLoadingRange(item, batchIndex)) {
+                                loadImage(img, spinner, item);
+                            }
+                        }, 50 * batchIndex);
+                    });
+                    
+                    // If there are more images to load, schedule the next batch
+                    batchCount++;
+                    if (end < nextBatch.length) {
+                        setTimeout(loadNextBatchPart, 500); // Add delay between batches
+                    } else {
+                        // Re-observe all gallery items when done
+                        observeGalleryItems();
+                    }
+                }
+                
+                // Start loading the first batch
+                loadNextBatchPart();
+            });
+            
+            loadMoreContainer.appendChild(loadMoreBtn);
+            gallery.appendChild(loadMoreContainer);
+        }
+        
         // Re-observe gallery items for infinite scroll
         observeGalleryItems();
     };
@@ -471,7 +603,17 @@ function initGallery() {
     renderImages(images);
     
     // Check if element should load (viewport or priority)
+    // More conservative loading strategy on mobile to prevent crashes
     function isInLoadingRange(el, index) {
+        const isMobile = window.innerWidth <= 768;
+        
+        // On mobile, be very conservative with what loads automatically
+        if (isMobile) {
+            return isElementInViewport(el) || 
+                   index < 6; // Only eagerly load first 6 images on mobile
+        }
+        
+        // On desktop, we can be more aggressive
         return isElementInViewport(el) || 
                index < 12 || // Load first 12 images
                index < 20 && Math.random() > 0.5; // Randomly load some more
@@ -504,18 +646,21 @@ function loadImage(img, spinner, container) {
     // Create performance tracker for debugging
     const startTime = performance.now();
     
+    // Mobile detection for performance optimizations
+    const isMobile = window.innerWidth <= 768;
+    
     // Add progressive loading with blur transition
     const applyProgressiveLoading = () => {
         // Image has loaded, fade it in with a nice blur transition
         container.style.setProperty('--loading-progress', '100%');
         
-        // First make it visible with blur
+        // First make it visible with blur (less blur on mobile for better performance)
         img.style.opacity = '1';
-        img.style.filter = 'blur(20px)';
+        img.style.filter = isMobile ? 'blur(10px)' : 'blur(20px)';
         
-        // Then animate to sharp
+        // Then animate to sharp (faster transition on mobile)
         setTimeout(() => {
-            img.style.transition = 'filter 0.5s ease-out';
+            img.style.transition = `filter ${isMobile ? '0.3s' : '0.5s'} ease-out`;
             img.style.filter = 'blur(0px)';
             
             setTimeout(() => {
@@ -526,14 +671,23 @@ function loadImage(img, spinner, container) {
                 delete img.dataset.loading;
                 spinner.style.display = 'none';
                 
+                // Mobile memory optimization: 
+                // On mobile, remove the original source from dataset to free memory
+                if (isMobile) {
+                    delete img.dataset.src;
+                }
+                
                 const loadTime = performance.now() - startTime;
                 
-                // Preload for lightbox if this is a priority image
+                // Preload for lightbox if this is a priority image (fewer on mobile)
                 const index = parseInt(container.getAttribute('data-index'));
-                if (index < 8) {
+                if (!isMobile && index < 8) {
+                    preloadForLightbox(src);
+                } else if (isMobile && index < 3) {
+                    // On mobile, only preload the first few images for lightbox
                     preloadForLightbox(src);
                 }
-            }, 500);
+            }, isMobile ? 300 : 500);
         }, 10);
     };
     
@@ -577,7 +731,9 @@ function preloadForLightbox(src) {
 
 // Intersection Observer for scroll animations and lazy loading
 function observeGalleryItems() {
-    // Create a more aggressive intersection observer for images
+    const isMobile = window.innerWidth <= 768;
+    
+    // Create an intersection observer with settings optimized for device
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -596,29 +752,47 @@ function observeGalleryItems() {
         });
     }, {
         threshold: 0.01, // Trigger with just 1% visibility
-        rootMargin: '200px 0px 200px 0px' // Load images further before they come into view
+        // Use a smaller margin on mobile to reduce memory pressure
+        rootMargin: isMobile ? '100px 0px 100px 0px' : '200px 0px 200px 0px'
     });
     
-    // Add scroll handler for better performance
+    // Add scroll handler with mobile optimization
     let scrollTimeout;
+    let lastScrollTime = 0;
+    const scrollThrottleTime = isMobile ? 300 : 200; // More throttling on mobile
+    
     window.addEventListener('scroll', function() {
+        const now = Date.now();
+        
+        // Skip handler if we're scrolling too frequently on mobile
+        if (isMobile && now - lastScrollTime < 100) {
+            return;
+        }
+        
+        lastScrollTime = now;
+        
         // Clear the timeout if it's been set
         if (scrollTimeout) {
             clearTimeout(scrollTimeout);
         }
         
         // Set a timeout to check for new items to load
+        // Use a longer delay on mobile
         scrollTimeout = setTimeout(function() {
-            document.querySelectorAll('.gallery-item').forEach(item => {
+            // On mobile, only check visible items to reduce DOM operations
+            const itemsToCheck = isMobile 
+                ? Array.from(document.querySelectorAll('.gallery-item')).slice(0, 20)
+                : document.querySelectorAll('.gallery-item');
+                
+            itemsToCheck.forEach(item => {
                 const img = item.querySelector('.gallery-image');
                 const spinner = item.querySelector('.spinner');
-                const index = parseInt(item.getAttribute('data-index'));
                 
                 if (img && !img.dataset.loaded && isElementInViewport(item)) {
                     loadImage(img, spinner, item);
                 }
             });
-        }, 200); // Check every 200ms during scroll
+        }, scrollThrottleTime);
     });
     
     // Observe all gallery items
@@ -632,17 +806,29 @@ function observeGalleryItems() {
         imageObserver.observe(item);
     });
     
-    // Resize handler
+    // Optimize resize handler for mobile
+    let resizeTimeout;
     window.addEventListener('resize', function() {
-        // Check for new items to load after resize
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            const img = item.querySelector('.gallery-image');
-            const spinner = item.querySelector('.spinner');
-            
-            if (img && !img.dataset.loaded && isElementInViewport(item)) {
-                loadImage(img, spinner, item);
-            }
-        });
+        // Skip excessive resize events
+        if (resizeTimeout) {
+            clearTimeout(resizeTimeout);
+        }
+        
+        resizeTimeout = setTimeout(function() {
+            // On mobile, limit the number of items to check
+            const itemsToCheck = isMobile
+                ? Array.from(document.querySelectorAll('.gallery-item')).slice(0, 15)
+                : document.querySelectorAll('.gallery-item');
+                
+            itemsToCheck.forEach(item => {
+                const img = item.querySelector('.gallery-image');
+                const spinner = item.querySelector('.spinner');
+                
+                if (img && !img.dataset.loaded && isElementInViewport(item)) {
+                    loadImage(img, spinner, item);
+                }
+            });
+        }, isMobile ? 300 : 150);
     });
 }
 
