@@ -643,6 +643,26 @@ footer {
     text-align: center;
 }
 
+.footer-legal {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 15px;
+    font-size: 0.8rem;
+}
+
+.footer-legal a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    opacity: 0.8;
+}
+
+.footer-legal a:hover {
+    color: var(--accent);
+    opacity: 1;
+}
+
 footer a {
     color: var(--text-secondary);
     text-decoration: none;
