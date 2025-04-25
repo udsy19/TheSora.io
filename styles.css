@@ -169,7 +169,7 @@ header {
 }
 
 .logo-text {
-    height: 150px;
+    height: 105px;
     width: auto;
     object-fit: contain;
 }
@@ -964,7 +964,7 @@ nav ul li a.active::after {
     }
 
     .logo-text {
-        height: 80px; /* Reduced logo size */
+        height: 56px; /* Reduced logo size */
     }
     
     .theme-toggle {
@@ -1159,7 +1159,7 @@ nav ul li a.active::after {
     }
     
     .logo-text {
-        height: 70px;
+        height: 49px;
     }
     
     .menu-toggle {
