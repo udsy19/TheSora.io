@@ -506,6 +506,61 @@ function initGallery() {
         { path: 'Gallery Pictures/Portrait Sessions/Shabad Photoshoot 201.jpg', caption: 'Shabad Portrait Session', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/Shabad Photoshoot 230.jpg', caption: 'Professional Headshots', category: ['portrait'] },
         
+        // Graduation Photography
+        { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-141.jpg', caption: 'Anshu Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-17.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-3.jpg', caption: 'Anshu Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-57.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-71.jpg', caption: 'Anshu Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-009.jpg', caption: 'Borris Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-011.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-022.jpg', caption: 'Borris Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-055.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-003.jpg', caption: 'Ira Mariamma Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-005.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-007.jpg', caption: 'Ira Mariamma Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-015.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-019.jpg', caption: 'Ira Mariamma Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-028.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-031.jpg', caption: 'Ira Mariamma Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-050.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-054.jpg', caption: 'Ira Mariamma Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-079.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-083.jpg', caption: 'Ira Mariamma Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-090.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg', caption: 'Ira Mariamma Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-121.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-290.jpg', caption: 'Ira Mariamma Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-346.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-10.jpg', caption: 'Isha Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-112.jpg', caption: 'Isha Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-174.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-2.jpg', caption: 'Isha Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-32.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-52.jpg', caption: 'Isha Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-90.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Nithin_GraduationShoot-035.jpg', caption: 'Nithin Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Nithin_GraduationShoot-041.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Nithin_GraduationShoot-095.jpg', caption: 'Nithin Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-03.jpg', caption: 'Praharsh Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-06.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-126.jpg', caption: 'Praharsh Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-152.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-168.jpg', caption: 'Praharsh Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-188.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-216.jpg', caption: 'Praharsh Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-234.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Praharsh_Draft-63.jpg', caption: 'Praharsh Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-07.jpg', caption: 'Pulkit Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-40.jpg', caption: 'Pulkit Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-41.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-65.jpg', caption: 'Pulkit Graduation', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-68.jpg', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/UVA09273.JPG', caption: 'Graduation Portrait', category: ['graduate'] },
+        { path: 'Gallery Pictures/Graduation/UVA09314.JPG', caption: 'Graduation Portrait', category: ['graduate'] },
+        
         // Additional Portrait Sessions
         { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', caption: 'Creative Portrait', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/UVA02098.jpg', caption: 'Portrait Series', category: ['portrait'] },
@@ -518,6 +573,13 @@ function initGallery() {
         { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg', caption: 'Studio Session', category: ['portrait'] },
         { path: 'Gallery Pictures/Portrait Sessions/UVA03271.jpg', caption: 'Portrait Series', category: ['portrait'] }
     ];
+    
+    console.log(`Total images loaded: ${images.length}`);
+    console.log('Image categories breakdown:');
+    console.log('- Portrait:', images.filter(img => img.category.includes('portrait')).length);
+    console.log('- Event:', images.filter(img => img.category.includes('event')).length);
+    console.log('- Themed:', images.filter(img => img.category.includes('themed')).length);
+    console.log('- Graduate:', images.filter(img => img.category.includes('graduate')).length);
     
     // Preload first few images for faster initial rendering
     const preloadCount = Math.min(6, images.length);
@@ -540,6 +602,8 @@ function initGallery() {
         const filteredImages = category === 'all' 
             ? images 
             : images.filter(image => image.category && image.category.includes(category));
+            
+        console.log(`Filtering by category: ${category}, found ${filteredImages.length} images`);
             
         // Render the filtered images
         renderImages(filteredImages);
