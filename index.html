@@ -24,6 +24,14 @@
             background: #fefefe;
             color: #000;
             line-height: 1.4;
+            opacity: 0;
+            animation: pageLoad 1.2s ease 0.3s forwards;
+        }
+        
+        @keyframes pageLoad {
+            to {
+                opacity: 1;
+            }
         }
         
         /* Header */
@@ -326,46 +334,82 @@
     </footer>
 
     <script>
-        // Image data (subset from script.js for homepage)
+        // Comprehensive image data for homepage filtering
         const images = [
+            // Portrait Sessions
             { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg', category: ['portrait'] },
             { path: 'Gallery Pictures/Portrait Sessions/UVA02861.jpg', category: ['portrait'] },
             { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', category: ['themed'] },
             { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg', category: ['graduate'] },
             { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_130.jpg', category: ['portrait'] },
             { path: 'Gallery Pictures/Portrait Sessions/UVA02098.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-15.jpg', category: ['event'] },
             { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_14.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg', category: ['graduate'] },
             { path: 'Gallery Pictures/Portrait Sessions/UVA03271.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-12.jpg', category: ['event'] },
             { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-6.jpg', category: ['themed'] },
             { path: 'Gallery Pictures/Portrait Sessions/UVA02145.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg', category: ['graduate'] },
             { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-025.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-068.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-072.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-082.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad Photoshoot 201.jpg', category: ['portrait'] },
+            
+            // Graduation Photos
+            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-141.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-009.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-32.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Graduation/Praharsh_Draft-152.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Graduation/Nithin_GraduationShoot-035.jpg', category: ['graduate'] },
+            
+            // Event Photography
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-15.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-12.jpg', category: ['event'] },
             { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-8.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-068.jpg', category: ['portrait'] }
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-3.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-7.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Event Photography/Holi-148.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Event Photography/Holi-234.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-21.jpg', category: ['event'] },
+            
+            // Themed Photoshoots
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-6.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-096.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-3.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-162.jpg', category: ['themed'] }
         ];
 
         const gallery = document.querySelector('.grid');
         let currentCategory = 'all';
 
-        // Render images
+        // Render images with performance optimizations
         function renderImages(imagesToRender) {
             gallery.innerHTML = '';
             
-            imagesToRender.forEach(image => {
+            // Use document fragment for better performance
+            const fragment = document.createDocumentFragment();
+            
+            imagesToRender.forEach((image, index) => {
                 const gridItem = document.createElement('div');
                 gridItem.className = 'grid-item';
-                gridItem.innerHTML = `<img src="${image.path}" alt="${image.category[0]}" loading="lazy">`;
+                
+                const img = document.createElement('img');
+                img.src = image.path;
+                img.alt = image.category[0];
+                img.loading = 'lazy';
+                img.style.willChange = 'transform'; // Optimize for animations
+                
+                gridItem.appendChild(img);
                 gridItem.addEventListener('click', () => {
                     window.location.href = 'gallery.html';
                 });
-                gallery.appendChild(gridItem);
+                
+                fragment.appendChild(gridItem);
             });
+            
+            gallery.appendChild(fragment);
         }
 
         // Filter images by category
