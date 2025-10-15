@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheSora.io - Photography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg: #fafafa;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --text-lighter: #999;
+            --border: #e0e0e0;
+            --accent: #000;
+            --serif: 'Playfair Display', serif;
+            --sans: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        [data-theme="dark"] {
+            --bg: #0a0a0a;
+            --text: #f5f5f5;
+            --text-light: #aaa;
+            --text-lighter: #777;
+            --border: #1a1a1a;
+            --accent: #fff;
+        }
+        
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            mix-blend-mode: difference;
+        }
+        
+        .cursor-dot {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: none;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 40px 60px;
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            opacity: 0;
+            animation: fadeInDown 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: var(--serif);
+            font-weight: 500;
+            font-size: 24px;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            letter-spacing: 0.02em;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .nav-links a:hover {
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 140px 60px 80px;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .hero-statement {
+            max-width: 600px;
+            margin-bottom: 120px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: heroReveal 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+        }
+        
+        .hero-statement h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-statement p {
+            font-size: 18px;
+            color: var(--text-light);
+            font-weight: 400;
+            line-height: 1.7;
+        }
+        
+        @keyframes heroReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Gallery Grid */
+        .gallery-section {
+            padding: 0 60px 120px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: var(--serif);
+            font-size: 48px;
+            font-weight: 500;
+            margin-bottom: 80px;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            margin-bottom: 80px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        /* Asymmetric Grid Layout */
+        .gallery-item:nth-child(1) {
+            grid-column: span 4;
+            aspect-ratio: 3/4;
+        }
+        
+        .gallery-item:nth-child(2) {
+            grid-column: span 5;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item:nth-child(3) {
+            grid-column: span 3;
+            aspect-ratio: 3/4;
+        }
+        
+        .gallery-item:nth-child(4) {
+            grid-column: span 6;
+            aspect-ratio: 5/3;
+        }
+        
+        .gallery-item:nth-child(5) {
+            grid-column: span 6;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item:nth-child(6) {
+            grid-column: span 4;
+            aspect-ratio: 3/4;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: grayscale(0.2) brightness(0.95);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0) brightness(1);
+        }
+        
+        .gallery-item:hover ~ .gallery-item {
+            opacity: 0.7;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            margin: -20px;
+            border-radius: 8px;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .view-more {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .view-more a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 15px 40px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .view-more a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+        }
+        
+        .view-more a:hover {
+            color: var(--bg);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .view-more a:hover::before {
+            left: 0;
+        }
+        
+        /* Animated Marquee */
+        .marquee-section {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 25px 0;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .marquee {
+            display: flex;
+            white-space: nowrap;
+            animation: marqueeScroll 30s linear infinite;
+            will-change: transform;
+        }
+        
+        .marquee.paused {
+            animation-play-state: paused;
+        }
+        
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        
+        .marquee-item {
+            margin-right: 60px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .marquee-separator {
+            margin: 0 30px;
+            opacity: 0.6;
+        }
+        
+        @keyframes marqueeScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 100px 60px 60px;
+            max-width: 1600px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: end;
+        }
+        
+        .footer-brand {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .footer-brand h2 {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 600;
+            line-height: 0.9;
+            margin-bottom: 20px;
+            letter-spacing: -0.03em;
+        }
+        
+        .footer-brand p {
+            color: var(--text-light);
+            font-size: 16px;
+            max-width: 400px;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .footer-column h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+        
+        /* Scroll Animation Classes */
+        .animate-in {
+            animation: slideInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            color: var(--bg);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(2),
+            .gallery-item:nth-child(3) {
+                grid-column: span 6;
+                aspect-ratio: 4/3;
+            }
+            
+            .gallery-item:nth-child(4),
+            .gallery-item:nth-child(5),
+            .gallery-item:nth-child(6) {
+                grid-column: span 3;
+                aspect-ratio: 3/4;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 30px 30px;
+            }
+            
+            .nav-links {
+                gap: 30px;
+            }
+            
+            .hero, .gallery-section, .footer {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .gallery-item {
+                grid-column: span 1 !important;
+                aspect-ratio: 4/5;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .cursor, .cursor-dot {
+                display: none;
+            }
+            
+            body {
+                cursor: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .nav-links a {
+                font-size: 14px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .marquee-item {
+                margin-right: 40px;
+            }
+            
+            .marquee-separator {
+                margin: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Sora</div>
+            <ul class="nav-links">
+                <li><a href="#work">Work</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-statement">
+            <h1>What do we see when we truly look?</h1>
+            <p>In every frame lies a story waiting to be told. Through my lens, I capture the quiet moments between the chaos—the authentic, the unexpected, the profoundly human.</p>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="work">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg" alt="Portrait Session">
+                <div class="gallery-caption">Ananya — Fall Portrait Series</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Portrait Sessions/UVA02861.jpg" alt="Portrait Session">
+                <div class="gallery-caption">Studio Session — Natural Light</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg" alt="Portrait Session">
+                <div class="gallery-caption">Vani — Creative Portrait</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg" alt="Themed Photoshoot">
+                <div class="gallery-caption">Thandava — Cultural Expression</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Portrait Sessions/UVA03378.jpg" alt="Creative Portrait">
+                <div class="gallery-caption">Environmental Portrait — Golden Hour</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg" alt="Graduation Photography">
+                <div class="gallery-caption">Isha — Graduation Milestone</div>
+            </div>
+        </div>
+        <div class="view-more">
+            <a href="gallery.html">View Complete Portfolio</a>
+        </div>
+    </section>
+
+    <section class="marquee-section">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span class="marquee-item">PORTRAIT SESSIONS</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">GRADUATION PHOTOGRAPHY</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">CREATIVE PROJECTS</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">EVENT COVERAGE</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">AVAILABLE FOR BOOKING</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">WEST LAFAYETTE, INDIANA</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">PORTRAIT SESSIONS</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">GRADUATION PHOTOGRAPHY</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">CREATIVE PROJECTS</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">EVENT COVERAGE</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">AVAILABLE FOR BOOKING</span>
+                <span class="marquee-separator">—</span>
+                <span class="marquee-item">WEST LAFAYETTE, INDIANA</span>
+                <span class="marquee-separator">—</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>Sora</h2>
+                <p>Capturing authentic moments through a contemporary lens. Available for portrait sessions, events, and creative collaborations.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="gallery.html">Work</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="https://instagram.com/thesora.io" target="_blank">Instagram</a></li>
+                        <li><a href="mailto:hello@thesora.io">Email</a></li>
+                        <li><a href="tel:+17745198830">Phone</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            
+            cursorDot.style.left = e.clientX - 2 + 'px';
+            cursorDot.style.top = e.clientY - 2 + 'px';
+        });
+        
+        // Cursor interactions
+        document.querySelectorAll('a, button, .gallery-item, .marquee-section').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2.5)';
+                cursor.style.borderWidth = '1px';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.borderWidth = '1px';
+            });
+        });
+        
+        // Marquee pause on hover
+        const marquee = document.querySelector('.marquee');
+        const marqueeSection = document.querySelector('.marquee-section');
+        
+        marqueeSection.addEventListener('mouseenter', () => {
+            marquee.classList.add('paused');
+        });
+        
+        marqueeSection.addEventListener('mouseleave', () => {
+            marquee.classList.remove('paused');
+        });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animate-in');
+                    }, index * 200);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements when DOM loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.section-title, .gallery-item, .view-more, .footer-brand, .footer-links');
+            elements.forEach(el => observer.observe(el));
+        });
+        
+        // Gallery hover effects
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                galleryItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.style.opacity = '0.6';
+                        otherItem.style.transform = 'scale(0.98)';
+                    }
+                });
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                galleryItems.forEach(otherItem => {
+                    otherItem.style.opacity = '1';
+                    otherItem.style.transform = 'scale(1)';
+                });
+            });
+            
+            item.addEventListener('click', () => {
+                window.location.href = 'gallery.html';
+            });
+        });
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Theme management
+        function getThemePreference() {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme) return storedTheme;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            const themeIcon = document.querySelector('.theme-icon');
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        }
+        
+        // Initialize theme
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialTheme = getThemePreference();
+            setTheme(initialTheme);
+        });
+        
+        // Enhanced scroll effects
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            // Subtle parallax on hero
+            const hero = document.querySelector('.hero-statement');
+            if (hero) {
+                hero.style.transform = `translateY(${rate * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
