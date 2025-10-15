@@ -26,13 +26,27 @@
             line-height: 1.4;
         }
         
-        /* Navigation */
-        .nav {
+        /* Header */
+        .header {
             position: fixed;
             top: 0;
+            left: 0;
             right: 0;
             padding: 40px 50px;
             z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .nav {
             display: flex;
             gap: 30px;
         }
@@ -60,6 +74,28 @@
             font-weight: 400;
             line-height: 1.1;
             letter-spacing: -0.02em;
+        }
+        
+        /* Gallery Categories */
+        .categories {
+            padding: 60px 50px 40px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .category-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .category-link:hover {
+            color: #000;
         }
         
         /* Image Grid */
@@ -173,9 +209,17 @@
         }
         
         @media (max-width: 768px) {
-            .nav {
+            .header {
                 padding: 30px 30px;
+            }
+            
+            .nav {
                 gap: 20px;
+            }
+            
+            .categories {
+                padding: 40px 30px 20px;
+                gap: 25px;
             }
             
             .opening {
@@ -227,14 +271,27 @@
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <a href="#work">WORK</a>
-        <a href="about.html">ABOUT</a>
-        <a href="contact.html">CONTACT</a>
-    </nav>
+    <header class="header">
+        <a href="index.html" class="logo">TheSora.io</a>
+        <nav class="nav">
+            <a href="#work">WORK</a>
+            <a href="about.html">ABOUT</a>
+            <a href="contact.html">CONTACT</a>
+        </nav>
+    </header>
 
     <section class="opening">
         <h1>What do you notice when the world goes quiet?</h1>
+    </section>
+
+    <section class="categories">
+        <a href="gallery.html" class="category-link">All Photos</a>
+        <a href="gallery.html?category=portrait" class="category-link">Portrait Sessions</a>
+        <a href="gallery.html?category=graduate" class="category-link">Graduate Sessions</a>
+        <a href="gallery.html?category=themed" class="category-link">Themed Photoshoots</a>
+        <a href="gallery.html?category=event" class="category-link">Event Photography</a>
+        <a href="gallery.html?category=landscape" class="category-link">Landscapes</a>
+        <a href="gallery.html?category=travel" class="category-link">Travel</a>
     </section>
 
     <section class="gallery" id="work">
