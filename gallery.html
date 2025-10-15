@@ -127,5 +127,22 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Handle category filtering from URL parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            
+            if (category) {
+                // Wait for gallery to initialize, then filter
+                setTimeout(() => {
+                    const categoryBtn = document.querySelector(`[data-category="${category}"]`);
+                    if (categoryBtn) {
+                        categoryBtn.click();
+                    }
+                }, 500);
+            }
+        });
+    </script>
 </body>
 </html>

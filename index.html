@@ -83,8 +83,8 @@
             padding: 80px 50px 60px;
             max-width: 600px;
             opacity: 0;
-            transform: translateY(30px);
-            animation: slideInUp 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+            transform: translateY(40px);
+            animation: slideInUp 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
         }
         
         .opening h1 {
@@ -109,7 +109,7 @@
             flex-wrap: wrap;
             opacity: 0;
             transform: translateY(20px);
-            animation: slideInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.4s forwards;
+            animation: slideInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards;
         }
         
         .category-link {
@@ -131,29 +131,51 @@
         /* Image Grid */
         .gallery {
             padding: 0 50px 100px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3.2s forwards;
         }
         
         .grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
+            align-items: start;
         }
         
         .grid-item {
-            aspect-ratio: 4/5;
             overflow: hidden;
             cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .grid-item.portrait {
+            aspect-ratio: 3/4;
+        }
+        
+        .grid-item.landscape {
+            aspect-ratio: 4/3;
+        }
+        
+        .grid-item.square {
+            aspect-ratio: 1/1;
         }
         
         .grid-item {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(40px) scale(0.9);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .grid-item.loaded {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+        }
+        
+        .grid-item.removing {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.8);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .grid-item img {
@@ -396,66 +418,84 @@
     </footer>
 
     <script>
-        // Comprehensive image data for homepage filtering
+        // Comprehensive image data with orientation info
         const images = [
             // Portrait Sessions
-            { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/UVA02861.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_130.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/UVA02098.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_14.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/UVA03271.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/UVA02145.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-025.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-068.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-072.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-082.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad Photoshoot 201.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02861.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', category: ['portrait'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_130.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02098.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_14.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA03271.jpg', category: ['portrait'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02145.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-025.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-068.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-072.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-082.jpg', category: ['portrait'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad Photoshoot 201.jpg', category: ['portrait'], orientation: 'landscape' },
             
             // Graduation Photos
-            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-141.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-009.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-32.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Graduation/Praharsh_Draft-152.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Graduation/Nithin_GraduationShoot-035.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg', category: ['graduate'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg', category: ['graduate'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg', category: ['graduate'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-141.jpg', category: ['graduate'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-009.jpg', category: ['graduate'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-32.jpg', category: ['graduate'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Graduation/Praharsh_Draft-152.jpg', category: ['graduate'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Graduation/Nithin_GraduationShoot-035.jpg', category: ['graduate'], orientation: 'portrait' },
             
             // Event Photography
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-15.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-12.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-8.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-3.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-7.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Event Photography/Holi-148.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Event Photography/Holi-234.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-21.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-15.jpg', category: ['event'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-12.jpg', category: ['event'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-8.jpg', category: ['event'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-3.jpg', category: ['event'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-7.jpg', category: ['event'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Event Photography/Holi-148.jpg', category: ['event'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Event Photography/Holi-234.jpg', category: ['event'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-21.jpg', category: ['event'], orientation: 'landscape' },
             
             // Themed Photoshoots
-            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', category: ['themed'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-6.jpg', category: ['themed'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-096.jpg', category: ['themed'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-3.jpg', category: ['themed'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-162.jpg', category: ['themed'] }
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', category: ['themed'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-6.jpg', category: ['themed'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-096.jpg', category: ['themed'], orientation: 'portrait' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-3.jpg', category: ['themed'], orientation: 'landscape' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-162.jpg', category: ['themed'], orientation: 'portrait' }
         ];
 
         const gallery = document.querySelector('.grid');
         let currentCategory = 'all';
 
-        // Render images with loading animations
-        function renderImages(imagesToRender) {
+        // Render images with smooth transitions and proper orientation
+        function renderImages(imagesToRender, animate = true) {
+            // If animating, first fade out existing items
+            if (animate && gallery.children.length > 0) {
+                const existingItems = Array.from(gallery.children);
+                existingItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('removing');
+                    }, index * 50);
+                });
+                
+                // Wait for removal animation to complete
+                setTimeout(() => {
+                    renderNewImages(imagesToRender);
+                }, 600);
+            } else {
+                renderNewImages(imagesToRender);
+            }
+        }
+        
+        function renderNewImages(imagesToRender) {
             gallery.innerHTML = '';
             
-            // Use document fragment for better performance
             const fragment = document.createDocumentFragment();
             
             imagesToRender.forEach((image, index) => {
                 const gridItem = document.createElement('div');
-                gridItem.className = 'grid-item';
+                gridItem.className = `grid-item ${image.orientation}`;
                 
                 const img = document.createElement('img');
                 img.alt = image.category[0];
@@ -465,23 +505,23 @@
                 // Add loading animation
                 img.onload = function() {
                     this.classList.add('loaded');
-                    // Staggered animation for grid items
                     setTimeout(() => {
                         gridItem.classList.add('loaded');
-                    }, index * 100);
+                    }, index * 120);
                 };
                 
                 img.onerror = function() {
-                    gridItem.classList.add('loaded'); // Show even if image fails
+                    gridItem.classList.add('loaded');
                     this.style.background = '#f0f0f0';
                 };
                 
-                // Set src after setting up event listeners
                 img.src = image.path;
                 
                 gridItem.appendChild(img);
                 gridItem.addEventListener('click', () => {
-                    window.location.href = 'gallery.html';
+                    // Open gallery page with proper category filter
+                    const categoryParam = currentCategory !== 'all' ? `?category=${currentCategory}` : '';
+                    window.location.href = `gallery.html${categoryParam}`;
                 });
                 
                 fragment.appendChild(gridItem);
@@ -515,8 +555,8 @@
             });
         });
 
-        // Initialize with all images
-        renderImages(images);
+        // Initialize with all images (no animation on first load)
+        renderImages(images, false);
 
         // Intersection Observer for scroll animations
         const observerOptions = {
