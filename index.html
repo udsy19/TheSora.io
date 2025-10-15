@@ -40,10 +40,13 @@
         }
         
         .logo {
-            font-size: 16px;
-            font-weight: 600;
-            color: #000;
-            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 32px;
+            width: auto;
         }
         
         .nav {
@@ -92,9 +95,11 @@
             transition: color 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            cursor: pointer;
         }
         
-        .category-link:hover {
+        .category-link:hover,
+        .category-link.active {
             color: #000;
         }
         
@@ -272,7 +277,9 @@
 </head>
 <body>
     <header class="header">
-        <a href="index.html" class="logo">TheSora.io</a>
+        <a href="index.html" class="logo">
+            <img src="Logo.png" alt="TheSora.io">
+        </a>
         <nav class="nav">
             <a href="#work">WORK</a>
             <a href="about.html">ABOUT</a>
@@ -285,77 +292,18 @@
     </section>
 
     <section class="categories">
-        <a href="gallery.html" class="category-link">All Photos</a>
-        <a href="gallery.html?category=portrait" class="category-link">Portrait Sessions</a>
-        <a href="gallery.html?category=graduate" class="category-link">Graduate Sessions</a>
-        <a href="gallery.html?category=themed" class="category-link">Themed Photoshoots</a>
-        <a href="gallery.html?category=event" class="category-link">Event Photography</a>
-        <a href="gallery.html?category=landscape" class="category-link">Landscapes</a>
-        <a href="gallery.html?category=travel" class="category-link">Travel</a>
+        <span class="category-link active" data-category="all">All Photos</span>
+        <span class="category-link" data-category="portrait">Portrait Sessions</span>
+        <span class="category-link" data-category="graduate">Graduate Sessions</span>
+        <span class="category-link" data-category="themed">Themed Photoshoots</span>
+        <span class="category-link" data-category="event">Event Photography</span>
+        <span class="category-link" data-category="landscape">Landscapes</span>
+        <span class="category-link" data-category="travel">Travel</span>
     </section>
 
     <section class="gallery" id="work">
         <div class="grid">
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/UVA02861.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg" alt="Themed">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/UVA03378.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg" alt="Graduation">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/VANI_EDIT_130.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/UVA02098.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Event Photography/FRO-FashionShow-15.jpg" alt="Event">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/VANI_EDIT_14.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg" alt="Graduation">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/UVA03271.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-12.jpg" alt="Event">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-6.jpg" alt="Themed">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/UVA02145.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg" alt="Graduation">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-025.jpg" alt="Portrait">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Event Photography/FRO-FashionShow-8.jpg" alt="Event">
-            </div>
-            <div class="grid-item">
-                <img src="Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-068.jpg" alt="Portrait">
-            </div>
+            <!-- Images will be loaded dynamically via JavaScript -->
         </div>
     </section>
 
@@ -378,6 +326,76 @@
     </footer>
 
     <script>
+        // Image data (subset from script.js for homepage)
+        const images = [
+            { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02861.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_130.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02098.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-15.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_14.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA03271.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-12.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-6.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02145.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-025.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-8.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-068.jpg', category: ['portrait'] }
+        ];
+
+        const gallery = document.querySelector('.grid');
+        let currentCategory = 'all';
+
+        // Render images
+        function renderImages(imagesToRender) {
+            gallery.innerHTML = '';
+            
+            imagesToRender.forEach(image => {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                gridItem.innerHTML = `<img src="${image.path}" alt="${image.category[0]}" loading="lazy">`;
+                gridItem.addEventListener('click', () => {
+                    window.location.href = 'gallery.html';
+                });
+                gallery.appendChild(gridItem);
+            });
+        }
+
+        // Filter images by category
+        function filterImages(category) {
+            currentCategory = category;
+            
+            const filteredImages = category === 'all' 
+                ? images 
+                : images.filter(image => image.category && image.category.includes(category));
+                
+            renderImages(filteredImages);
+            
+            // Update active category link
+            document.querySelectorAll('.category-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+        }
+
+        // Category link event listeners
+        document.querySelectorAll('.category-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const category = link.getAttribute('data-category');
+                filterImages(category);
+            });
+        });
+
+        // Initialize with all images
+        renderImages(images);
+
         // Marquee pause on hover
         const marquee = document.querySelector('.marquee');
         const marqueeContainer = document.querySelector('.marquee-container');
@@ -388,13 +406,6 @@
         
         marqueeContainer.addEventListener('mouseleave', () => {
             marquee.classList.remove('paused');
-        });
-        
-        // Gallery item clicks
-        document.querySelectorAll('.grid-item').forEach(item => {
-            item.addEventListener('click', () => {
-                window.location.href = 'gallery.html';
-            });
         });
         
         // Smooth scroll for navigation
