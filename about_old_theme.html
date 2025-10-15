@@ -19,10 +19,6 @@
             box-sizing: border-box;
         }
         
-        html {
-            scroll-behavior: smooth;
-        }
-        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #fefefe;
@@ -79,13 +75,13 @@
             opacity: 0.6;
         }
         
-        /* Opening Statement */
-        .opening {
-            padding: 140px 50px 60px;
-            max-width: 600px;
+        /* Content */
+        .content {
+            padding: 140px 50px 100px;
+            max-width: 700px;
         }
         
-        .opening h1 {
+        .content h1 {
             font-size: 48px;
             font-weight: 400;
             line-height: 1.1;
@@ -93,17 +89,11 @@
             margin-bottom: 60px;
         }
         
-        /* Content */
-        .content {
-            padding: 0 50px 100px;
-            max-width: 600px;
-        }
-        
         .content p {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 400;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            line-height: 1.7;
+            margin-bottom: 35px;
             color: #000;
         }
         
@@ -155,16 +145,11 @@
                 gap: 20px;
             }
             
-            .opening, .content {
-                padding-left: 30px;
-                padding-right: 30px;
+            .content {
+                padding: 100px 30px 60px;
             }
             
-            .opening {
-                padding-top: 100px;
-            }
-            
-            .opening h1 {
+            .content h1 {
                 font-size: 36px;
             }
             
@@ -185,7 +170,7 @@
         }
         
         @media (max-width: 480px) {
-            .opening h1 {
+            .content h1 {
                 font-size: 28px;
             }
             
@@ -207,11 +192,9 @@
         </nav>
     </header>
 
-    <section class="opening">
-        <h1>Finding beauty in the spaces between moments</h1>
-    </section>
-
     <main class="content">
+        <h1>A story through the lens</h1>
+        
         <p>I'm Udaya Vijay Anand, a photographer based in West Lafayette, Indiana. My work focuses on capturing authentic moments and genuine emotions, finding beauty in both the planned and the unexpected.</p>
         
         <p>Photography, for me, is about more than technical precision—it's about connection. Whether it's a graduation milestone, a creative portrait session, or an intimate moment between friends, I aim to document the stories that matter most to you.</p>

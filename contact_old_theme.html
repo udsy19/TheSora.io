@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - TheSora.io</title>
+    <title>Contact - TheSora.io</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,10 +17,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
         }
         
         body {
@@ -79,13 +75,13 @@
             opacity: 0.6;
         }
         
-        /* Opening Statement */
-        .opening {
-            padding: 140px 50px 60px;
-            max-width: 600px;
+        /* Content */
+        .content {
+            padding: 140px 50px 100px;
+            max-width: 800px;
         }
         
-        .opening h1 {
+        .content h1 {
             font-size: 48px;
             font-weight: 400;
             line-height: 1.1;
@@ -93,22 +89,52 @@
             margin-bottom: 60px;
         }
         
-        /* Content */
-        .content {
-            padding: 0 50px 100px;
-            max-width: 600px;
+        .contact-info {
+            margin-bottom: 60px;
         }
         
-        .content p {
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 1.6;
+        .contact-item {
             margin-bottom: 30px;
-            color: #000;
         }
         
-        .content p:last-child {
-            margin-bottom: 0;
+        .contact-item h3 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .contact-item p,
+        .contact-item a {
+            font-size: 20px;
+            font-weight: 400;
+            color: #000;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .contact-item a:hover {
+            opacity: 0.6;
+        }
+        
+        .availability {
+            background: #f8f8f8;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        .availability h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .availability p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
         }
         
         /* Footer */
@@ -155,16 +181,11 @@
                 gap: 20px;
             }
             
-            .opening, .content {
-                padding-left: 30px;
-                padding-right: 30px;
+            .content {
+                padding: 100px 30px 60px;
             }
             
-            .opening {
-                padding-top: 100px;
-            }
-            
-            .opening h1 {
+            .content h1 {
                 font-size: 36px;
             }
             
@@ -185,7 +206,7 @@
         }
         
         @media (max-width: 480px) {
-            .opening h1 {
+            .content h1 {
                 font-size: 28px;
             }
             
@@ -202,25 +223,40 @@
         </a>
         <nav class="nav">
             <a href="index.html">WORK</a>
-            <a href="about.html" class="active">ABOUT</a>
-            <a href="contact.html">CONTACT</a>
+            <a href="about.html">ABOUT</a>
+            <a href="contact.html" class="active">CONTACT</a>
         </nav>
     </header>
 
-    <section class="opening">
-        <h1>Finding beauty in the spaces between moments</h1>
-    </section>
-
     <main class="content">
-        <p>I'm Udaya Vijay Anand, a photographer based in West Lafayette, Indiana. My work focuses on capturing authentic moments and genuine emotions, finding beauty in both the planned and the unexpected.</p>
+        <h1>Let's create something together</h1>
         
-        <p>Photography, for me, is about more than technical precision—it's about connection. Whether it's a graduation milestone, a creative portrait session, or an intimate moment between friends, I aim to document the stories that matter most to you.</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>Email</h3>
+                <a href="mailto:hello@thesora.io">hello@thesora.io</a>
+            </div>
+            
+            <div class="contact-item">
+                <h3>Phone</h3>
+                <a href="tel:+17745198830">+1 774-519-8830</a>
+            </div>
+            
+            <div class="contact-item">
+                <h3>Location</h3>
+                <p>West Lafayette, Indiana</p>
+            </div>
+            
+            <div class="contact-item">
+                <h3>Instagram</h3>
+                <a href="https://instagram.com/thesora.io" target="_blank">@thesora.io</a>
+            </div>
+        </div>
         
-        <p>My approach is collaborative and relaxed. I believe the best photographs happen when people feel comfortable being themselves. This philosophy guides every session, from initial concept to final delivery.</p>
-        
-        <p>When I'm not behind the camera, you'll find me exploring new places, reading, or experimenting with different creative projects. These experiences constantly inform my photography, bringing fresh perspectives to each shoot.</p>
-        
-        <p>Currently available for portrait sessions, graduation photography, event coverage, and creative collaborations throughout Indiana and beyond.</p>
+        <div class="availability">
+            <h3>Current Availability</h3>
+            <p>I'm currently accepting bookings for portrait sessions, graduation photography, event coverage, and creative collaborations. Response time is typically within 24 hours. Let's discuss your vision and create something meaningful together.</p>
+        </div>
     </main>
 
     <footer class="footer">
