@@ -3,7 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheSora.io</title>
+    <title>TheSora.io - Portrait & Graduation Photography in West Lafayette</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Professional portrait and graduation photography in West Lafayette, Indiana. Specializing in subtle, dreamy editing for students at Purdue University. Book your session with Udaya Vijay Anand.">
+    <meta name="keywords" content="photographer West Lafayette, Purdue photographer, graduation photography, portrait photography, student photographer, Indiana photography, grad photos, senior portraits, professional headshots">
+    <meta name="author" content="Udaya Vijay Anand">
+    <meta name="geo.region" content="US-IN">
+    <meta name="geo.placename" content="West Lafayette, Indiana">
+    <meta name="geo.position" content="40.4259;-86.9081">
+    <meta name="ICBM" content="40.4259, -86.9081">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TheSora.io - Portrait & Graduation Photography in West Lafayette">
+    <meta property="og:description" content="Professional portrait and graduation photography with subtle, dreamy editing. Serving students in West Lafayette and Purdue University.">
+    <meta property="og:image" content="https://thesora.io/Udaya_About_Picture.png">
+    <meta property="og:url" content="https://thesora.io">
+    <meta property="og:site_name" content="TheSora.io Photography">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TheSora.io - Portrait & Graduation Photography">
+    <meta name="twitter:description" content="Professional photography with subtle, dreamy editing in West Lafayette, Indiana">
+    <meta name="twitter:image" content="https://thesora.io/Udaya_About_Picture.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://thesora.io">
+    
+    <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -11,6 +40,65 @@
     <!-- Vercel Analytics -->
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
+    
+    <!-- Structured Data for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://thesora.io",
+      "name": "TheSora.io Photography",
+      "alternateName": "Udaya Vijay Anand Photography",
+      "description": "Professional portrait and graduation photography specializing in subtle, dreamy editing for students in West Lafayette, Indiana.",
+      "url": "https://thesora.io",
+      "image": "https://thesora.io/Udaya_About_Picture.png",
+      "logo": "https://thesora.io/Logo.png",
+      "telephone": "+1-774-519-8830",
+      "email": "hello@thesora.io",
+      "founder": {
+        "@type": "Person",
+        "name": "Udaya Vijay Anand",
+        "jobTitle": "Professional Photographer",
+        "image": "https://thesora.io/Udaya_About_Picture.png"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "West Lafayette",
+        "addressRegion": "IN",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.4259,
+        "longitude": -86.9081
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "West Lafayette",
+          "containedIn": "Indiana, USA"
+        },
+        {
+          "@type": "City", 
+          "name": "Lafayette",
+          "containedIn": "Indiana, USA"
+        }
+      ],
+      "serviceType": [
+        "Portrait Photography",
+        "Graduation Photography", 
+        "Senior Portraits",
+        "Event Photography",
+        "Professional Headshots"
+      ],
+      "priceRange": "$$",
+      "openingHours": "Mo-Su 09:00-20:00",
+      "sameAs": [
+        "https://instagram.com/thesora.io",
+        "https://instagram.com/udsyx"
+      ]
+    }
+    </script>
     
     <style>
         * {
@@ -30,6 +118,26 @@
             line-height: 1.4;
             opacity: 0;
             animation: pageLoad 1.2s ease 0.3s forwards;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        /* Page transition overlay */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fefefe;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        .page-transition.active {
+            opacity: 1;
+            pointer-events: all;
         }
         
         @keyframes pageLoad {
@@ -184,6 +292,50 @@
         
         .grid-item:hover img {
             transform: scale(1.02);
+        }
+        
+        /* Social sharing overlay */
+        .share-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .grid-item:hover .share-overlay {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        
+        .share-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .share-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .share-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #333;
         }
         
         /* Loading skeleton for images */
@@ -359,14 +511,17 @@
     </style>
 </head>
 <body>
+    <!-- Page transition overlay -->
+    <div class="page-transition" id="pageTransition"></div>
+    
     <header class="header">
         <a href="index.html" class="logo">
             <img src="Logo.png" alt="TheSora.io">
         </a>
         <nav class="nav">
             <a href="#work">WORK</a>
-            <a href="about.html">ABOUT</a>
-            <a href="contact.html">CONTACT</a>
+            <a href="about.html" class="page-link">ABOUT</a>
+            <a href="contact.html" class="page-link">CONTACT</a>
         </nav>
     </header>
 
@@ -401,61 +556,93 @@
     <footer class="footer">
         <div class="footer-brand">SORA</div>
         <nav class="footer-nav">
-            <a href="gallery.html">WORK</a>
-            <a href="about.html">ABOUT</a>
+            <a href="gallery.html" class="page-link">WORK</a>
+            <a href="about.html" class="page-link">ABOUT</a>
             <a href="https://instagram.com/thesora.io" target="_blank">INSTAGRAM</a>
             <a href="mailto:hello@thesora.io">EMAIL</a>
         </nav>
     </footer>
 
     <script>
-        // Comprehensive image data for homepage filtering - strategically distributed
+        // Smooth page transitions
+        function initPageTransitions() {
+            const pageTransition = document.getElementById('pageTransition');
+            const pageLinks = document.querySelectorAll('.page-link');
+            
+            pageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetUrl = link.getAttribute('href');
+                    
+                    // Show transition overlay
+                    pageTransition.classList.add('active');
+                    
+                    // Navigate after transition starts
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 150);
+                });
+            });
+            
+            // Also handle programmatic navigation
+            window.navigateWithTransition = (url) => {
+                pageTransition.classList.add('active');
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 150);
+            };
+        }
+        
+        // Initialize transitions when page loads
+        document.addEventListener('DOMContentLoaded', initPageTransitions);
+        
+        // Comprehensive image data for homepage filtering - strategically distributed with SEO-optimized alt text
         const images = [
             // Mixed distribution to avoid adjacent similar shoots/people
-            { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-15.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg', category: ['portrait'], alt: 'Professional autumn portrait session in West Lafayette - natural light photography with subtle editing' },
+            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-102.jpg', category: ['graduate'], alt: 'Purdue University graduation photography - professional grad photos with cap and gown' },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-15.jpg', category: ['event'], alt: 'Fashion show event photography - dynamic runway photography with professional lighting' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg', category: ['themed'], alt: 'Creative themed photoshoot with artistic composition and dreamy editing style' },
             
-            { path: 'Gallery Pictures/Portrait Sessions/UVA02861.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-12.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02861.jpg', category: ['portrait'], alt: 'Student portrait photography in West Lafayette - professional headshots for college students' },
+            { path: 'Gallery Pictures/Graduation/Pulkit_GraduationShoot-22.jpg', category: ['graduate'], alt: 'Male graduation portrait at Purdue University - senior photos with diploma and academic regalia' },
+            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-12.jpg', category: ['event'], alt: 'Sigma Kappa sorority event photography - group photos and social gatherings documentation' },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg', category: ['portrait'], alt: 'Professional female portrait with subtle retouching - natural lighting and dreamy editing style' },
             
-            { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-6.jpg', category: ['themed'] },
-            { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-8.jpg', category: ['event'] },
+            { path: 'Gallery Pictures/Graduation/Ira_Mariamma_GraduationShoot-113.jpg', category: ['graduate'], alt: 'Female graduation photography session - professional grad photos with academic achievements celebration' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-6.jpg', category: ['themed'], alt: 'Creative merchandise photoshoot - product photography with artistic direction and styling' },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA03378.jpg', category: ['portrait'], alt: 'Outdoor portrait session for college student - environmental portraiture with natural backgrounds' },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-8.jpg', category: ['event'], alt: 'Fashion runway photography - professional event coverage with dramatic lighting and composition' },
             
-            { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-141.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_130.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Event Photography/Holi-148.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-096.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Graduation/Anshu_GraduationShoot-141.jpg', category: ['graduate'], alt: 'Graduation ceremony photography - capturing milestone moments for Purdue University students' },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_130.jpg', category: ['portrait'], alt: 'Studio-style portrait photography with professional lighting and subtle post-processing' },
+            { path: 'Gallery Pictures/Event Photography/Holi-148.jpg', category: ['event'], alt: 'Holi festival event photography - colorful celebration documentation with vibrant editing' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-096.jpg', category: ['themed'], alt: 'Cultural themed photoshoot with traditional elements and artistic composition' },
             
-            { path: 'Gallery Pictures/Portrait Sessions/UVA02098.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-009.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-3.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_14.jpg', category: ['portrait'] },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02098.jpg', category: ['portrait'], alt: 'Male portrait photography session - professional headshots for students and young professionals' },
+            { path: 'Gallery Pictures/Graduation/Borris_Graduationshoot_TheSora.io-009.jpg', category: ['graduate'], alt: 'Male graduation photos at Purdue campus - academic achievement portraits with cap and gown' },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-3.jpg', category: ['event'], alt: 'Fashion week photography coverage - backstage and runway moments with professional quality' },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_14.jpg', category: ['portrait'], alt: 'Female portrait with natural lighting - West Lafayette photographer specializing in student portraits' },
             
-            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-7.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Portrait Sessions/UVA03271.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-32.jpg', category: ['graduate'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-3.jpg', category: ['themed'] },
+            { path: 'Gallery Pictures/Event Photography/Sigma-Kappa_thesora.io-7.jpg', category: ['event'], alt: 'Greek life event photography - sorority gatherings and social events documentation' },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA03271.jpg', category: ['portrait'], alt: 'Professional student portrait photography - college senior pictures with dreamy editing style' },
+            { path: 'Gallery Pictures/Graduation/Isha_GraduationShoot-32.jpg', category: ['graduate'], alt: 'Female graduation portrait session - celebrating academic milestones with professional photography' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Dhruva_Merch_Edited_Uncompressed-3.jpg', category: ['themed'], alt: 'Commercial photography with creative direction - product and lifestyle photography services' },
             
-            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Event Photography/Holi-234.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Portrait Sessions/UVA02145.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Graduation/Praharsh_Draft-152.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Portrait Sessions/VANI_EDIT_69.jpg', category: ['portrait'], alt: 'Artistic portrait photography with soft editing - natural beauty enhancement and dreamy aesthetics' },
+            { path: 'Gallery Pictures/Event Photography/Holi-234.jpg', category: ['event'], alt: 'Cultural festival photography - Holi celebration coverage with vibrant colors and energy' },
+            { path: 'Gallery Pictures/Portrait Sessions/UVA02145.jpg', category: ['portrait'], alt: 'Student lifestyle portrait photography - authentic moments captured with subtle post-processing' },
+            { path: 'Gallery Pictures/Graduation/Praharsh_Draft-152.jpg', category: ['graduate'], alt: 'Male graduation photography at Purdue University - academic success celebration portraits' },
             
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-025.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-21.jpg', category: ['event'] },
-            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-162.jpg', category: ['themed'] },
-            { path: 'Gallery Pictures/Graduation/Nithin_GraduationShoot-035.jpg', category: ['graduate'] },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-025.jpg', category: ['portrait'], alt: 'Professional male portrait session - headshots for students and professionals in West Lafayette' },
+            { path: 'Gallery Pictures/Event Photography/FRO-FashionShow-21.jpg', category: ['event'], alt: 'Fashion industry event photography - runway shows and designer showcases professional coverage' },
+            { path: 'Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-162.jpg', category: ['themed'], alt: 'Dance and movement themed photography - capturing artistic expression with dynamic composition' },
+            { path: 'Gallery Pictures/Graduation/Nithin_GraduationShoot-035.jpg', category: ['graduate'], alt: 'Graduate student professional photography - PhD and masters degree celebration portraits' },
             
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-068.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-072.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-082.jpg', category: ['portrait'] },
-            { path: 'Gallery Pictures/Portrait Sessions/Shabad Photoshoot 201.jpg', category: ['portrait'] }
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-068.jpg', category: ['portrait'], alt: 'Male portrait photography with professional lighting - student and professional headshot services' },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-072.jpg', category: ['portrait'], alt: 'Creative male portrait session - artistic direction with subtle editing and natural poses' },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad-Photoshoot-thesora.io-082.jpg', category: ['portrait'], alt: 'Professional portrait photography for young professionals - LinkedIn and professional headshots' },
+            { path: 'Gallery Pictures/Portrait Sessions/Shabad Photoshoot 201.jpg', category: ['portrait'], alt: 'Male student portrait photography - college senior pictures with dreamy, subtle editing style' }
         ];
 
         const gallery = document.querySelector('.grid');
@@ -495,7 +682,7 @@
                 gridItem.className = 'grid-item';
                 
                 const img = document.createElement('img');
-                img.alt = image.category[0];
+                img.alt = image.alt;
                 img.loading = 'lazy';
                 img.style.willChange = 'transform';
                 
@@ -520,19 +707,56 @@
                 
                 img.src = image.path;
                 
+                // Create share overlay
+                const shareOverlay = document.createElement('div');
+                shareOverlay.className = 'share-overlay';
+                
+                // Twitter share button
+                const twitterBtn = document.createElement('button');
+                twitterBtn.className = 'share-btn';
+                twitterBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                `;
+                twitterBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    shareToTwitter(image);
+                });
+                
+                // Pinterest share button  
+                const pinterestBtn = document.createElement('button');
+                pinterestBtn.className = 'share-btn';
+                pinterestBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.404-5.959 1.404-5.959s-.358-.72-.358-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001.017.001z"/>
+                    </svg>
+                `;
+                pinterestBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    shareToPinterest(image);
+                });
+                
+                shareOverlay.appendChild(twitterBtn);
+                shareOverlay.appendChild(pinterestBtn);
+                
                 gridItem.appendChild(img);
+                gridItem.appendChild(shareOverlay);
+                
                 gridItem.addEventListener('click', (e) => {
+                    // Don't navigate if clicking on share buttons
+                    if (e.target.closest('.share-btn')) {
+                        return;
+                    }
+                    
                     e.preventDefault();
                     e.stopPropagation();
                     console.log('Clicking image, redirecting to gallery.html');
                     
-                    // Force redirect to current gallery page
-                    const currentOrigin = window.location.origin;
-                    const currentPath = window.location.pathname.replace('/index.html', '').replace(/\/$/, '');
-                    const galleryUrl = `${currentOrigin}${currentPath}/gallery.html?t=${Date.now()}`;
-                    
-                    console.log('Redirecting to:', galleryUrl);
-                    window.location.href = galleryUrl;
+                    // Use smooth transition to gallery
+                    window.navigateWithTransition('./gallery.html');
                 });
                 
                 fragment.appendChild(gridItem);
@@ -639,6 +863,178 @@
                 opening.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
             }
         });
+
+        // Keyboard navigation for homepage
+        document.addEventListener('keydown', (e) => {
+            // Number keys 1-7 for category switching
+            if (e.key >= '1' && e.key <= '7') {
+                e.preventDefault();
+                const categoryLinks = document.querySelectorAll('.category-link');
+                const categoryIndex = parseInt(e.key) - 1;
+                if (categoryLinks[categoryIndex]) {
+                    categoryLinks[categoryIndex].click();
+                    categoryLinks[categoryIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+            
+            // G key to go to gallery
+            if (e.key.toLowerCase() === 'g') {
+                e.preventDefault();
+                window.navigateWithTransition('./gallery.html');
+            }
+            
+            // A key to go to about
+            if (e.key.toLowerCase() === 'a') {
+                e.preventDefault();
+                window.navigateWithTransition('./about.html');
+            }
+            
+            // C key to go to contact
+            if (e.key.toLowerCase() === 'c') {
+                e.preventDefault();
+                window.navigateWithTransition('./contact.html');
+            }
+            
+            // H key to go home
+            if (e.key.toLowerCase() === 'h') {
+                e.preventDefault();
+                window.navigateWithTransition('./index.html');
+            }
+            
+            // Space to scroll down smoothly
+            if (e.key === ' ') {
+                e.preventDefault();
+                window.scrollBy({
+                    top: window.innerHeight * 0.8,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Mobile touch gestures for category switching
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+
+        const categoryContainer = document.querySelector('.categories');
+        
+        categoryContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        categoryContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            const minSwipeDistance = 50;
+
+            // Only handle horizontal swipes (ignore vertical scrolling)
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+                const categoryLinks = document.querySelectorAll('.category-link');
+                const currentActive = document.querySelector('.category-link.active');
+                const currentIndex = Array.from(categoryLinks).indexOf(currentActive);
+
+                if (deltaX > 0 && currentIndex > 0) {
+                    // Swipe right - previous category
+                    categoryLinks[currentIndex - 1].click();
+                } else if (deltaX < 0 && currentIndex < categoryLinks.length - 1) {
+                    // Swipe left - next category
+                    categoryLinks[currentIndex + 1].click();
+                }
+            }
+        }
+
+        // Add visual feedback for mobile users
+        if ('ontouchstart' in window) {
+            const style = document.createElement('style');
+            style.textContent = `
+                .categories {
+                    position: relative;
+                }
+                .categories::after {
+                    content: 'Swipe left/right to browse categories';
+                    position: absolute;
+                    bottom: -25px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: 12px;
+                    color: #999;
+                    opacity: 0.7;
+                    pointer-events: none;
+                }
+                @media (min-width: 768px) {
+                    .categories::after {
+                        display: none;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Social sharing functions
+        function shareToTwitter(image) {
+            const baseUrl = window.location.origin;
+            const imageUrl = `${baseUrl}/${encodeURIComponent(image.path)}`;
+            const text = `Check out this amazing ${image.category[0]} photo by @thesora.io! 📸 Professional photography in West Lafayette, Indiana.`;
+            const url = `${baseUrl}/gallery.html`;
+            
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            window.open(twitterUrl, '_blank', 'width=550,height=420');
+        }
+
+        function shareToPinterest(image) {
+            const baseUrl = window.location.origin;
+            const imageUrl = `${baseUrl}/${encodeURIComponent(image.path)}`;
+            const description = `${image.alt} | Professional photography by TheSora.io in West Lafayette, Indiana`;
+            const url = `${baseUrl}/gallery.html`;
+            
+            const pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(description)}`;
+            window.open(pinterestUrl, '_blank', 'width=750,height=320');
+        }
+
+        // Copy link to clipboard function
+        function copyImageLink(image) {
+            const baseUrl = window.location.origin;
+            const shareUrl = `${baseUrl}/gallery.html?photo=${encodeURIComponent(image.path)}`;
+            
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                // Show toast notification
+                showToast('Link copied to clipboard!');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #333;
+                color: white;
+                padding: 12px 24px;
+                border-radius: 4px;
+                z-index: 10000;
+                font-size: 14px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.style.opacity = '1', 100);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 2000);
+        }
     </script>
 </body>
 </html>
