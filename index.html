@@ -366,6 +366,129 @@
             }
         }
         
+        /* Lightbox Modal */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            cursor: default;
+        }
+        
+        .lightbox-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s ease;
+        }
+        
+        .lightbox-close:hover {
+            opacity: 0.7;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .lightbox-prev {
+            left: -70px;
+        }
+        
+        .lightbox-next {
+            right: -70px;
+        }
+        
+        .lightbox-info {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .lightbox-close {
+                top: -40px;
+                font-size: 24px;
+            }
+            
+            .lightbox-prev {
+                left: 10px;
+            }
+            
+            .lightbox-next {
+                right: 10px;
+            }
+            
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+        
         /* Marquee */
         .marquee-container {
             background: #000;
@@ -1042,10 +1165,9 @@
                     
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('Clicking image, redirecting to gallery.html');
                     
-                    // Use smooth transition to gallery
-                    window.navigateWithTransition('./gallery.html');
+                    // Open lightbox with the current image
+                    openLightbox(index, imagesToRender);
                 });
                 
                 fragment.appendChild(gridItem);
@@ -1079,6 +1201,153 @@
             });
         });
 
+        // Lightbox functionality
+        let currentLightboxIndex = 0;
+        let currentLightboxImages = [];
+        
+        function createLightbox() {
+            const lightbox = document.createElement('div');
+            lightbox.className = 'lightbox';
+            lightbox.innerHTML = `
+                <div class="lightbox-content">
+                    <button class="lightbox-close">&times;</button>
+                    <button class="lightbox-nav lightbox-prev">&lt;</button>
+                    <button class="lightbox-nav lightbox-next">&gt;</button>
+                    <img class="lightbox-image" alt="">
+                    <div class="lightbox-info"></div>
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+            
+            // Event listeners
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+            lightbox.querySelector('.lightbox-prev').addEventListener('click', () => navigateLightbox(-1));
+            lightbox.querySelector('.lightbox-next').addEventListener('click', () => navigateLightbox(1));
+            
+            return lightbox;
+        }
+        
+        function openLightbox(index, images) {
+            currentLightboxIndex = index;
+            currentLightboxImages = images;
+            
+            let lightbox = document.querySelector('.lightbox');
+            if (!lightbox) {
+                lightbox = createLightbox();
+            }
+            
+            updateLightboxImage();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.querySelector('.lightbox');
+            if (lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        function navigateLightbox(direction) {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) {
+                currentLightboxIndex = currentLightboxImages.length - 1;
+            } else if (currentLightboxIndex >= currentLightboxImages.length) {
+                currentLightboxIndex = 0;
+            }
+            updateLightboxImage();
+        }
+        
+        function updateLightboxImage() {
+            const lightbox = document.querySelector('.lightbox');
+            if (!lightbox) return;
+            
+            const image = currentLightboxImages[currentLightboxIndex];
+            const lightboxImg = lightbox.querySelector('.lightbox-image');
+            const lightboxInfo = lightbox.querySelector('.lightbox-info');
+            
+            lightboxImg.src = image.path;
+            lightboxImg.alt = image.alt;
+            lightboxInfo.textContent = `${currentLightboxIndex + 1} / ${currentLightboxImages.length}`;
+            
+            // Update navigation button visibility
+            const prevBtn = lightbox.querySelector('.lightbox-prev');
+            const nextBtn = lightbox.querySelector('.lightbox-next');
+            prevBtn.style.display = currentLightboxImages.length > 1 ? 'flex' : 'none';
+            nextBtn.style.display = currentLightboxImages.length > 1 ? 'flex' : 'none';
+        }
+        
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.querySelector('.lightbox');
+            if (lightbox && lightbox.classList.contains('active')) {
+                switch(e.key) {
+                    case 'Escape':
+                        closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        navigateLightbox(-1);
+                        break;
+                    case 'ArrowRight':
+                        navigateLightbox(1);
+                        break;
+                }
+                return;
+            }
+            
+            // Homepage keyboard navigation (existing code below)
+            // Number keys 1-7 for category switching
+            if (e.key >= '1' && e.key <= '7') {
+                e.preventDefault();
+                const categoryLinks = document.querySelectorAll('.category-link');
+                const categoryIndex = parseInt(e.key) - 1;
+                if (categoryLinks[categoryIndex]) {
+                    categoryLinks[categoryIndex].click();
+                    categoryLinks[categoryIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+            
+            // G key to go to gallery
+            if (e.key.toLowerCase() === 'g') {
+                e.preventDefault();
+                window.navigateWithTransition('./gallery.html');
+            }
+            
+            // A key to go to about
+            if (e.key.toLowerCase() === 'a') {
+                e.preventDefault();
+                window.navigateWithTransition('./about.html');
+            }
+            
+            // C key to go to contact
+            if (e.key.toLowerCase() === 'c') {
+                e.preventDefault();
+                window.navigateWithTransition('./contact.html');
+            }
+            
+            // H key to go home
+            if (e.key.toLowerCase() === 'h') {
+                e.preventDefault();
+                window.navigateWithTransition('./index.html');
+            }
+            
+            // Space to scroll down smoothly
+            if (e.key === ' ') {
+                e.preventDefault();
+                window.scrollBy({
+                    top: window.innerHeight * 0.8,
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
         // Initialize with all images (no animation on first load)
         renderImages(images, false);
 
@@ -1153,52 +1422,6 @@
             }
         });
 
-        // Keyboard navigation for homepage
-        document.addEventListener('keydown', (e) => {
-            // Number keys 1-7 for category switching
-            if (e.key >= '1' && e.key <= '7') {
-                e.preventDefault();
-                const categoryLinks = document.querySelectorAll('.category-link');
-                const categoryIndex = parseInt(e.key) - 1;
-                if (categoryLinks[categoryIndex]) {
-                    categoryLinks[categoryIndex].click();
-                    categoryLinks[categoryIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }
-            
-            // G key to go to gallery
-            if (e.key.toLowerCase() === 'g') {
-                e.preventDefault();
-                window.navigateWithTransition('./gallery.html');
-            }
-            
-            // A key to go to about
-            if (e.key.toLowerCase() === 'a') {
-                e.preventDefault();
-                window.navigateWithTransition('./about.html');
-            }
-            
-            // C key to go to contact
-            if (e.key.toLowerCase() === 'c') {
-                e.preventDefault();
-                window.navigateWithTransition('./contact.html');
-            }
-            
-            // H key to go home
-            if (e.key.toLowerCase() === 'h') {
-                e.preventDefault();
-                window.navigateWithTransition('./index.html');
-            }
-            
-            // Space to scroll down smoothly
-            if (e.key === ' ') {
-                e.preventDefault();
-                window.scrollBy({
-                    top: window.innerHeight * 0.8,
-                    behavior: 'smooth'
-                });
-            }
-        });
 
         // Mobile touch gestures for category switching
         let touchStartX = 0;
