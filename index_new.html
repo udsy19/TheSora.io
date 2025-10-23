@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheSora.io - Photography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg: #fefefe;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --border: #e5e5e5;
+            --accent: #000;
+        }
+        
+        [data-theme="dark"] {
+            --bg: #0a0a0a;
+            --text: #f5f5f5;
+            --text-light: #999;
+            --border: #1a1a1a;
+            --accent: #fff;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 30px;
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            opacity: 0;
+            animation: navFadeIn 1s ease 0.5s forwards;
+        }
+        
+        @keyframes navFadeIn {
+            to { opacity: 1; }
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: -0.01em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 30px;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease 0.8s forwards;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease 1.2s forwards;
+        }
+        
+        .cta {
+            display: inline-flex;
+            padding: 12px 24px;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease 1.6s forwards;
+        }
+        
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Gallery Preview */
+        .gallery-preview {
+            padding: 80px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 60px;
+            text-align: center;
+            opacity: 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2px;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            filter: grayscale(0.3);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0);
+        }
+        
+        .view-more {
+            text-align: center;
+            opacity: 0;
+        }
+        
+        .view-more a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            padding-bottom: 2px;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .view-more a:hover {
+            color: var(--text);
+            border-color: var(--text);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 30px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .contact h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+        
+        .contact p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+        
+        .contact-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding-bottom: 2px;
+            border-bottom: 1px solid var(--text);
+            opacity: 0;
+        }
+        
+        /* Animations on scroll */
+        .animate-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .hero, .gallery-preview, .contact {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">TheSora.io</div>
+            <ul class="nav-links">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Photography</h1>
+            <p>Capturing authentic moments through a minimalist lens</p>
+            <a href="gallery.html" class="cta">View Work</a>
+        </div>
+    </section>
+
+    <section class="gallery-preview" id="work">
+        <h2 class="section-title">Recent Work</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Portrait Sessions/Ananya_Fall_Shoot_133.jpg" alt="Portrait Session">
+            </div>
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Portrait Sessions/UVA02861.jpg" alt="Portrait Session">
+            </div>
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Portrait Sessions/VANI_EDIT_95.jpg" alt="Portrait Session">
+            </div>
+            <div class="gallery-item">
+                <img src="Gallery Pictures/Themed Photoshoot/Thandava-Photoshoot-144.jpg" alt="Themed Photoshoot">
+            </div>
+        </div>
+        <div class="view-more">
+            <a href="gallery.html">View all work →</a>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Let's work together</h2>
+        <p>Available for portrait sessions, events, and creative projects</p>
+        <a href="contact.html" class="contact-link">Get in touch</a>
+    </section>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animate-in');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.section-title, .gallery-item, .view-more, .contact h2, .contact p, .contact-link');
+            elements.forEach(el => observer.observe(el));
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Gallery item click handlers
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                window.location.href = 'gallery.html';
+            });
+        });
+    </script>
+</body>
+</html>
